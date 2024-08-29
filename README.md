@@ -9,7 +9,6 @@ Provides examples of working with optional values and error handling.
 
 2. SwiftUI Demo
 
-Showcases the development of a simple transactions management app using SwiftUI.
 Covers the creation of a custom transaction model, display of a transaction list, and navigation to a transaction detail screen.
 Demonstrates the use of SwiftUI's state management, navigation, and data passing between views.
 Highlights the principles of code reuse and DRY (Don't Repeat Yourself) in the implementation.
