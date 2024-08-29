@@ -2,15 +2,6 @@
 
 This contains a Swift Playground demonstrating the concept of Optionals in Swift.
 
-## Contents
-
-1. Introduction to Optionals
-2. Declaration of Optionals
-3. Optional Binding (retrieving optionals safely)
-4. Using guard and optionals for retrieval 
-5. Structs with optionals, optional binding and optional chaining 
-6. Nil Coalescing operator
-
 ## How to Use
 
 1. Clone this repository
