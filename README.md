@@ -1,4 +1,4 @@
-# Mobile-Development-Bootcamp
+# Mobile Development Bootcamp
 
 This repository contains two demo projects for iOS development:
 1. Optionals Demo
