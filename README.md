@@ -1,16 +1,12 @@
 # Mobile Development Bootcamp
 
-This repository contains two demo projects for iOS development:
-1. Optionals Demo
+This repository contains demo projects, exercises, and solutions for iOS development using Swift, UIKit, and SwiftUI. The content is structured to guide learners through key concepts in mobile development and provides hands-on practice with solutions.
 
-Demonstrates the usage of optional types in Swift and how to handle them safely.
-Covers topics like optional binding, optional chaining, and nil-coalescing operators.
-Provides examples of working with optional values and error handling.
+## Project Structure
 
-2. SwiftUI Demo
+- **Swift**: Focuses on core Swift language topics including optionals, control flow, error handling, and more.
+- **UIKit**: Covers UIKit essentials for building user interfaces, handling gestures, animations, and working with navigation controllers.
+- **SwiftUI**: Demonstrates building UIs with SwiftUI, focusing on state management, view composition, and navigation.
+- **Exercises**: Contains coding exercises designed to reinforce iOS development concepts.
+- **Solutions**: Provides sample solutions for exercises to help you compare and learn from your code implementations.
 
-Covers the creation of a custom transaction model, display of a transaction list, and navigation to a transaction detail screen.
-Demonstrates the use of SwiftUI's state management, navigation, and data passing between views.
-Highlights the principles of code reuse and DRY (Don't Repeat Yourself) in the implementation.
-
-Feel free to explore the individual README files within the project directories for more detailed information on each demo.
