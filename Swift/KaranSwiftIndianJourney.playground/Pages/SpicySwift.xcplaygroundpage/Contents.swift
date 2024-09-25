@@ -126,6 +126,64 @@ Help Karan enhance his Great Indian Food Adventure game with these challenges:
 
 // Write your solution here
 
+// Implement a scoring system
+func calculateScore(dish: FoodItem) -> Int {
+    return dish.spiciness * 10
+}
+
+print("Scoring System")
+print("Calculating score for Butter Chicken:")
+print("Score: \(calculateScore(dish: indianDishes[0]))")
+print("Calculating score for Vegetable Vindaloo:")
+print("Score: \(calculateScore(dish: indianDishes[7]))")
+print()
+
+
+// Add a feature to "cool down" by drinking lassi
+func drinkLassi() {
+    print("\n🥛 Ahhh! You drink a cool lassi to reset your spice tolerance.")
+    spiceTolerance = 2
+}
+
+print("Drink Lassi to Cool Down")
+print("Current spice tolerance: \(spiceTolerance)")
+spiceTolerance = 5 // Simulating increased spice tolerance
+print("Spice tolerance after eating spicy food: \(spiceTolerance)")
+drinkLassi()
+print("Spice tolerance after drinking lassi: \(spiceTolerance)")
+print()
+
+// Create a function that recommends dishes based on the current spice tolerance
+func recommendDish(tolerance: Int) -> FoodItem {
+    var suitableDishes: [FoodItem] = []
+    
+    for dish in indianDishes {
+        if dish.spiciness <= tolerance + 1 {
+            suitableDishes.append(dish)
+        }
+    }
+    
+    if suitableDishes.isEmpty {
+        return indianDishes[0]  // Return the first dish if no suitable dishes found
+    } else {
+        let randomIndex = Int.random(in: 0..<suitableDishes.count)
+        return suitableDishes[randomIndex]
+    }
+}
+
+print("Dish Recommendation")
+print("Recommending a dish for spice tolerance 2:")
+let recommendation1 = recommendDish(tolerance: 2)
+print("Recommended: \(recommendation1.name) from \(recommendation1.state) (Spiciness: \(recommendation1.spiciness))")
+
+print("\nRecommending a dish for spice tolerance 4:")
+let recommendation2 = recommendDish(tolerance: 4)
+print("Recommended: \(recommendation2.name) from \(recommendation2.state) (Spiciness: \(recommendation2.spiciness))")
+
+// Additional test to show how it handles extreme cases
+print("\nRecommending a dish for spice tolerance 0 (should return any dish):")
+let recommendation3 = recommendDish(tolerance: 0)
+print("Recommended: \(recommendation3.name) from \(recommendation3.state) (Spiciness: \(recommendation3.spiciness))")
 
 /*:
 Fantastic work! You've helped Karan create an exciting food adventure game while spicing up your Swift skills.

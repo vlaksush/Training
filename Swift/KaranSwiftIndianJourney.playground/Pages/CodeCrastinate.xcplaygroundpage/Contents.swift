@@ -145,6 +145,60 @@ Help Karan enhance his Lazy Coder app with these challenges:
 
 // Write your solution here
 
+// Challenge 1: debugCode() function with optionals
+enum BugSeverity: String {
+    case minor = "It's just a small typo"
+    case major = "This might crash the app"
+    case critical = "The entire system is on fire!"
+}
+
+func debugCode() {
+    let potentialBug: BugSeverity? = [BugSeverity.minor, .major, .critical].randomElement()
+    
+    if let bug = potentialBug {
+        print("Bug found! Severity: \(bug.rawValue)")
+        switch bug {
+        case .minor: print("Meh, I'll fix it later.")
+        case .major: print("Time to copy-paste some StackOverflow solutions!")
+        case .critical: print("PANIC MODE ACTIVATED!")
+        }
+    } else {
+        print("No bugs found. That's suspicious...")
+    }
+}
+
+print("--- Debug Test ---")
+debugCode()
+
+enum RefactorOutcome: String, CaseIterable {
+    case improved = "The code is now a work of art!"
+    case broken = "Well, it worked before I touched it..."
+    case unchanged = "I've mastered the art of changing nothing."
+}
+
+func refactorCode() {
+    let outcome = RefactorOutcome.allCases.randomElement()!
+    let linesChanged = Int.random(in: -50...100)
+    
+    print("Refactoring complete!")
+    print("Outcome: \(outcome.rawValue)")
+    
+    switch outcome {
+    case .improved:
+        print("Lines of code optimized: \(abs(linesChanged))")
+        print("Efficiency increased by \(Int.random(in: 1...100))%")
+    case .broken:
+        print("New bugs introduced: \(abs(linesChanged))")
+        print("Stack Overflow searches initiated: \(Int.random(in: 5...20))")
+    case .unchanged:
+        print("Hours spent: \(Int.random(in: 2...8))")
+        print("Excuses prepared: \(Int.random(in: 3...10))")
+    }
+}
+
+print("\n--- Refactor Test ---")
+refactorCode()
+
 /*:
 Excellent work! You've helped Karan create a humorous yet surprisingly insightful procrastination simulation app. Remember, sometimes the best way to overcome procrastination is to lean into it creatively!
 

@@ -8,8 +8,8 @@ Karan's in Chennai, creating a hip shopping app inspired by local markets.
 ## Setting Up Shop with Variables and Constants
 */
 
-let shopName == "Chennai Streetz"  // Constant
-let initialPrice = "1500"  // Variable
+let shopName = "Chennai Streetz"  // Constant
+let initialPrice = 1500  // Variable
 let minimumPrice = 1000  // Constant
 print("Welcome to \(shopName)!")  // String interpolation
 
@@ -21,7 +21,7 @@ Karan uses various data types to represent different aspects of his products:
 
 let itemName: String = "Vintage Graphic Tee"
 var quantity: Int = 1
-var isInfluencer: Bool = "false"
+var isInfluencer: Bool = false
 var discount: Double = 0.0
 
 /*:
@@ -50,14 +50,14 @@ No Indian bazaar is complete without some bargaining! Karan implements a negotia
 func negotiatePrice(customerOffer: Int) {
     if customerOffer >= minimumPrice {
         print("It's a vibe! Sold for ₹\(customerOffer)")
-    } else if customerOffer >= minimumPrice * 0.9 {
+    } else if Double(customerOffer) >= Double(minimumPrice) * 0.9 {
         print("Bruh, can you go a bit higher? This tee is fire!")
     } else {
         print("Oof! That's way too low. This is vintage gold!")
     }
 }
 
-negotiatePrice(customerOffer: 1000)
+negotiatePrice(customerOffer: initialPrice)
 
 /*:
 ## Reading the Room with Switch Statements
@@ -71,7 +71,7 @@ func reactToCustomer(mood: String) {
         print("You're vibing with it! Want me to hold it for you?")
     case "unsure":
         print("Take your time, fam. Quality stuff right here!")
-    case "unimpressed"
+    case "unimpressed":
         print("Not feeling it? Let me show you our latest drops!")
     default:
         print("How about a quick chai break while you decide?")
@@ -96,9 +96,9 @@ To handle varying numbers of items in a purchase, Karan creates a variadic funct
 */
 
 func calculateTotalBill(items: Double...) -> Double {
-    let total = 0.0
+    var total = 0.0
     for item in items {
-        total += total
+        total += item
     }
     return total
 }
@@ -137,11 +137,83 @@ Help Karan add some cool features to his Chennai Streetz app:
     as an inout parameter and updates it based on the loyalty points earned (1 point per 100 rupees spent).
     Print out the earned points and the new total including the point value (1 point = 1 rupee).
 
-
 */
 
 // Write your solution here
 
+// 1. Trendsetter Discount Eligibility
+func isTrendsetterEligible(customer: (name: String, styleScore: Int, purchaseHistory: Int)) -> Bool {
+    let (_, styleScore, purchaseHistory) = customer
+    return styleScore > 80 && purchaseHistory > 5000
+}
+
+// Test the function
+let customer1 = (name: "Priya", styleScore: 85, purchaseHistory: 6000)
+let customer2 = (name: "Rahul", styleScore: 75, purchaseHistory: 4000)
+
+print("Is \(customer1.name) eligible for Trendsetter discount? \(isTrendsetterEligible(customer: customer1))")
+print("Is \(customer2.name) eligible for Trendsetter discount? \(isTrendsetterEligible(customer: customer2))")
+
+// 2. Calculate price with GST
+func priceWithGST(itemPrice: Double) -> Double {
+    return itemPrice * (1 + gst)
+}
+
+// Test the function
+let originalPrice = 1000.0
+let priceWithTax = priceWithGST(itemPrice: originalPrice)
+print("Original price: ₹\(originalPrice), Price with GST: ₹\(priceWithTax)")
+
+
+// 3. Clothing sizes array and categorization
+let sizes = ["XS", "S", "M", "L", "XL", "XXL"]
+
+
+
+
+for size in sizes {
+    print(size)
+}
+
+for size in sizes {
+    switch size {
+    case "XS", "S":
+        print("\(size) is categorized as Small")
+    case "M", "L":
+        print("\(size) is categorized as Medium")
+    case "XL", "XXL":
+        print("\(size) is categorized as Large")
+    default:
+        print("\(size) is an unknown size category")
+    }
+}
+
+
+// 4. Average price calculation
+func averagePrice(items: Double...) -> Double {
+    var total:Double = 0.0
+    for item in items {
+        total += item
+    }
+    return total / Double(items.count)
+}
+
+// Test the function
+let avgPrice = averagePrice(items: 1500, 2000, 1750, 1250)
+print("Average price of items: ₹\(avgPrice)")
+
+// 5. Loyalty points system
+func applyLoyaltyPoints(totalPurchase: inout Double) {
+    let points = Int(totalPurchase / 100)
+    let pointValue = Double(points)
+    print("You've earned \(points) loyalty points!")
+    totalPurchase += pointValue
+    print("New total including point value: ₹\(totalPurchase)")
+}
+
+// Test the function
+var purchaseTotal = 5500.0
+applyLoyaltyPoints(totalPurchase: &purchaseTotal)
 
 /*:
 Great job! You've helped Karan create a Gen Z-friendly shopping app while mastering some intermediate Swift concepts.

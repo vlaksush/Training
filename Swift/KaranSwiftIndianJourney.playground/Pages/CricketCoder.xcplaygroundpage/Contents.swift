@@ -97,6 +97,44 @@ print("Match Result: \(matchOutcome)")
 
 */
 
+func generateCommentary(for player: Player) -> String {
+    let action: String
+    switch player.role {
+    case .batsman:
+        action = ["hits a six!", "drives through the covers", "defends solidly"].randomElement() ?? "bats"
+    case .bowler:
+        action = ["bowls a yorker", "delivers a bouncer", "spins the ball beautifully"].randomElement() ?? "bowls"
+    case .allRounder:
+        action = ["shows versatility", "contributes with both bat and ball", "changes the game's momentum"].randomElement() ?? "plays"
+    }
+    return "\(player.name) \(action)"
+}
+
+// Test for Challenge 2
+print("\nChallenge 2 Test:")
+players.forEach { player in
+    print(generateCommentary(for: player))
+}
+
+func calculateAverageSkill(_ team: [Player]) -> Double {
+    guard !team.isEmpty else { return 0 }
+    let totalSkill = team.reduce(0) { $0 + $1.skillLevel }
+    return Double(totalSkill) / Double(team.count)
+}
+
+// Test
+let averageSkill = calculateAverageSkill(players)
+print("Average team skill: \(averageSkill)")
+
+func playersAboveThreshold(_ players: [Player], threshold: Int) -> [Player] {
+    return players.filter { $0.skillLevel > threshold }
+}
+
+// Test
+let highSkilledPlayers = playersAboveThreshold(players, threshold: 90)
+print("\nPlayers above 90 skill:")
+highSkilledPlayers.forEach { print($0.name) }
+
 // Your code here
 
 //: [Next](@next)

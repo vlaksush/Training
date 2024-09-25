@@ -114,6 +114,53 @@ Help Karan enhance his Bollywood movie database with these challenges:
 
 // Write your solution here
 
+// Filter movies from a specific decade
+let filterByDecade: (Int) -> (Movie) -> Bool = { decade in
+    return { movie in
+        (movie.year >= decade) && (movie.year < decade + 10)
+    }
+}
+
+// Test
+let moviesFrom2010s = filterMovies(from: bollywoodMovies, using: filterByDecade(2010))
+print("\nMovies from 2010s:")
+moviesFrom2010s.forEach { print("\($0.title) (\($0.year))") }
+
+// Group movies by release decade
+func groupMoviesByDecade(_ movies: [Movie]) -> [Int: [Movie]] {
+    return movies.reduce(into: [:]) { (result, movie) in
+        let decade = (movie.year / 10) * 10
+        result[decade, default: []].append(movie)
+    }
+}
+
+// Test
+let groupedMovies = groupMoviesByDecade(bollywoodMovies)
+print("\nMovies grouped by decade:")
+for (decade, movies) in groupedMovies.sorted(by: { $0.key < $1.key }) {
+    print("\(decade)s: \(movies.map { $0.title }.joined(separator: ", "))")
+}
+
+// Get Movie tuples from a list of titles
+func getMovies(from titles: [String]) -> [Movie?] {
+    return titles.map { title in
+        bollywoodMovies.first { $0.title.lowercased() == title.lowercased() }
+    }
+}
+
+// Test
+let moviesToFind = ["3 Idiots", "Sholay", "PK", "Nonexistent Movie"]
+let foundMovies = getMovies(from: moviesToFind)
+print("\nSearching for movies:")
+for (index, movie) in foundMovies.enumerated() {
+    if let movie = movie {
+        print("\(moviesToFind[index]): Found - \(movie.title) (\(movie.year)) - Rating: \(movie.rating)")
+    } else {
+        print("\(moviesToFind[index]): Not found")
+    }
+}
+
+
 /*:
 Great job!
 

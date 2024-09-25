@@ -164,6 +164,7 @@ func currencyConverter() -> Int {
 print("\nBudget/day in USD:")
 print(currencyConverter())
 
+
 var extraItems = ["Power Bank","Water Bottle"]
 print("\nExtra Packages:")
 
@@ -171,6 +172,27 @@ print("\nAdditional items for your packing list:")
 for (index, item) in extraItems.enumerated() {
     print("☐ \(index + 1). \(item)")
 }
+
+let emergencyContacts = (
+    familyContact:(name:"Mom", phone: "+1 343-353-3535"),
+    localContact:(name:"Hotel Reception", phone: "+91 94440950023"),
+    embassy:(name:"US Embassy", phone: "+91 9885600001")
+)
+
+print("\nEmergency Contacts")
+print("Family: \(emergencyContacts.familyContact.name) - \(emergencyContacts.familyContact.phone)")
+print("Hotel: \(emergencyContacts.localContact.name) - \(emergencyContacts.localContact.phone)")
+print("Embassy: \(emergencyContacts.embassy.name) - \(emergencyContacts.embassy.phone)")
+
+func formatCurrency(budgetPerDay: Int, exchangeRate: Double = 83) -> String {
+    let numberFormatter = NumberFormatter()
+    numberFormatter.currencyCode = "USD"
+    numberFormatter.numberStyle = .currency
+    let convertedAmount = Double(budgetPerDay) / exchangeRate
+    return numberFormatter.string(from: NSNumber(value: convertedAmount)) ?? "USD \(convertedAmount)"
+}
+
+print(formatCurrency(budgetPerDay: budgetPerDay, exchangeRate: 83))
 
 /*:
 Great job! You've helped Karan plan his trip to India while learning Swift basics.
