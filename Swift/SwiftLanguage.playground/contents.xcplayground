@@ -4,8 +4,14 @@
         <page name='Introduction'/>
         <page name='SwiftBasics'/>
         <page name='Enumeration'/>
-        <page name='Optionals &amp; Guard'/>
         <page name='Closures'/>
         <page name='HigherOrderFunctions'/>
+        <page name='Optionals'/>
+        <page name='Class'/>
+        <page name='Struct'/>
+        <page name='Any&amp;AnyObject'/>
+        <page name='Extensions'/>
+        <page name='Protocols'/>
+        <page name='Generics'/>
     </pages>
 </playground>

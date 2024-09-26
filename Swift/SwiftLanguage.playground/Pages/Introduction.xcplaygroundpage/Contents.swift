@@ -20,6 +20,24 @@
  5. [Higher Order Functions](HigherOrderFunctions)
     - Map, filter, reduce, and other functional programming concepts
  
+ 6. [Structs](Struct)
+    - Creating and using value types in Swift
+ 
+ 7. [Classes](Class)
+    - Object-oriented programming with classes
+ 
+ 8. [Closures](Closures)
+    - Working with closures and higher-order functions
+ 
+ 9. [Extensions](Extensions)
+    - Extending existing types and protocols
+ 
+ 10.[Generics](Generics)
+    - Writing flexible, reusable functions and types
+ 
+ 11.[Any&AnyObject](Any&AnyObject)
+    - Special Types
+ 
  ## How to Use This Playground
 
  - Navigate through different topics using the links above
