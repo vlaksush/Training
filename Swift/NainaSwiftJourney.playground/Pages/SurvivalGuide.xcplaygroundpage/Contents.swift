@@ -18,6 +18,26 @@ class Developer {
         self.skillLevel = skillLevel
         self.coffeeConsumed = 0
     }
+    
+    // Computed property
+    var efficiency: String {
+        if skillLevel < 10 {
+            return "Beginner"
+        } else if skillLevel < 20 {
+            return "Intermediate"
+        } else {
+            return "Expert"
+        }
+    }
+    
+    // Lazy property
+    lazy var favoriteIDE: String = {
+        // Simulating a complex calculation or fetching data
+        print("Determining favorite IDE...")
+        let ides = ["Xcode", "VSCode", "IntelliJ", "Eclipse"]
+        return ides.randomElement() ?? "Notepad"
+    }()
+
 
     func code() {
         skillLevel += 1
@@ -32,6 +52,7 @@ class Developer {
             print("\(name) is stuck. Need more coffee!")
         }
     }
+
 }
 
 let Naina = Developer(name: "Naina", skillLevel: 1)
@@ -43,6 +64,7 @@ for day in 1...5 {
         Naina.code()
     }
     Naina.debug()
+    Naina.favoriteIDE
     print("---")
 }
 
@@ -54,6 +76,37 @@ for day in 1...5 {
 
 // Write your solution here
 
+// Extension for Challenge 1
+extension Developer {
+    func takeBreak() {
+        if coffeeConsumed > 5 {
+            skillLevel += 1
+            print("\(name) took a break and feels refreshed! Skill level increased to \(skillLevel).")
+        }
+        coffeeConsumed = max(0, coffeeConsumed - 1)
+        print("\(name)'s coffee level decreased to \(coffeeConsumed).")
+    }
+}
+
+// Test the new method
+let naina = Developer(name: "Naina", skillLevel: 1)
+for _ in 1...6 { naina.code() }  // Consume 6 coffees
+naina.takeBreak()
+naina.takeBreak()
+
+import Foundation
+
+extension Double {
+    /// Formats the double as a currency string
+    func asCurrency() -> String {
+        return String(format: "$%.2f", self)
+    }
+}
+
+let price = 19.99
+print("Price: \(price.asCurrency())")
+
 /*:
 [Previous](@previous) | [Next: Corporate Life Survival Kit](@next)
 */
+
