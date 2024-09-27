@@ -13,5 +13,9 @@
         <page name='Extensions'/>
         <page name='Protocols'/>
         <page name='Generics'/>
+        <page name='ErrorHandling'/>
+        <page name='TypeCasting'/>
+        <page name='AccessControl'/>
+        <page name='ARC'/>
     </pages>
 </playground>

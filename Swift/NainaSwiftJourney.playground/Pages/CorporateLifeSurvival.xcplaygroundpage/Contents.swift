@@ -59,6 +59,7 @@ let survivalKit = CorporateSurvivalKit()
 survivalKit.addTask(Meeting(name: "Daily Standup", priority: 3, duration: 15))
 survivalKit.addTask(CodeReview(name: "New Feature PR", priority: 2, linesOfCode: 150))
 survivalKit.addTask(Meeting(name: "Product Planning", priority: 1, duration: 60))
+survivalKit.addTask(Presentation(name: "Product Planning", priority: 1, slides: 5, duration: 15))
 
 print("Naina's daily tasks:")
 survivalKit.executeTasks()
@@ -70,6 +71,18 @@ survivalKit.executeTasks()
  */
 
 // Write your solution here
+
+// Implement a New CorporateTask
+struct Presentation: CorporateTask {
+    let name: String
+    let priority: Int
+    let slides: Int
+    let duration: Int
+    
+    func execute() {
+        print("Delivering presentation: \(name) with \(slides) slides for \(duration) minutes")
+    }
+}
 
 /*:
 [Previous](@previous) | [Next: First Paycheck? Let's Spend It All](@next)

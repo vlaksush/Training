@@ -66,3 +66,158 @@
 [Previous](@previous)
 */
 
+class Task {
+    let title: String
+    var isCompleted: Bool
+    
+    init(title: String) {
+        self.title = title
+        self.isCompleted = false
+    }
+    
+    func markAsCompleted() {
+        isCompleted = true
+    }
+    
+    func displayInfo() {
+        print("Task: \(title), Completed: \(isCompleted ? "Yes" : "No")")
+    }
+}
+
+class TodoList {
+    var tasks: [Task] = []
+    
+    func addTask(title: String) {
+        let newTask = Task(title: title)
+        tasks.append(newTask)
+    }
+    
+    func markTaskCompleted(at index: Int) {
+        guard index >= 0 && index < tasks.count else {
+            print("Invalid task index")
+            return
+        }
+        tasks[index].markAsCompleted()
+    }
+    
+    func displayAllTasks() {
+        if tasks.isEmpty {
+            print("No tasks in the list.")
+        } else {
+            for (index, task) in tasks.enumerated() {
+                print("\(index + 1). ", terminator: "")
+                task.displayInfo()
+            }
+        }
+    }
+}
+
+// Create a todo list
+let myTodoList = TodoList()
+
+// Add some tasks
+myTodoList.addTask(title: "Buy groceries")
+myTodoList.addTask(title: "Finish homework")
+myTodoList.addTask(title: "Go for a run")
+
+// Display all tasks
+print("All tasks:")
+myTodoList.displayAllTasks()
+
+// Mark a task as completed
+myTodoList.markTaskCompleted(at: 1)
+
+// Display all tasks again
+print("\nAfter completing a task:")
+myTodoList.displayAllTasks()
+
+// Challenge 2
+
+extension Array where Element: Numeric {
+    func sumOfSquares() -> Element {
+        return self.reduce(0) { $0 + $1 * $1 }
+    }
+}
+
+// Example usage:
+let intArray = [1, 2, 3, 4, 5]
+print(intArray.sumOfSquares())
+
+let doubleArray = [1.5, 2.5, 3.5]
+print(doubleArray.sumOfSquares())
+
+let emptyArray: [Int] = []
+print(emptyArray.sumOfSquares())
+
+let stringArray = ["Name1","Name2"]
+
+//: ## Part 1: Define the Protocols
+
+protocol Product {
+    var name: String { get }
+    var price: Double { get }
+    func description() -> String
+}
+
+protocol Discountable {
+    func applyDiscount(_ percentage: Double) -> Double
+}
+
+struct Book: Product, Discountable {
+    let name: String
+    let price: Double
+    let author: String
+    
+    func description() -> String {
+        return "\(name) by \(author)"
+    }
+    
+    func applyDiscount(_ percentage: Double) -> Double {
+        return price * (1 - percentage / 100)
+    }
+}
+
+struct Electronics: Product {
+    let name: String
+    let price: Double
+    let brand: String
+    
+    func description() -> String {
+        return "\(brand) \(name)"
+    }
+}
+
+import Foundation
+
+let book1 = Book(name: "Swift Programming", price: 49.99, author: "John Doe")
+let book2 = Book(name: "iOS Development", price: 59.99, author: "Jane Smith")
+let electronics1 = Electronics(name: "Headphones", price: 199.99, brand: "AudioMax")
+let electronics2 = Electronics(name: "Smartphone", price: 699.99, brand: "TechGiant")
+
+var store: [Product] = [book1, book2, electronics1, electronics2]
+
+func printProductDetails(_ product: Product) {
+    print("Name: \(product.name)")
+    print("Price: $\(String(format: "%.2f", product.price))")
+    print("Description: \(product.description())")
+    print("------------------------")
+}
+
+func applyStoreWideDiscount(_ products: [Product], discountPercentage: Double) -> [Double] {
+    return products.map { product in
+        if let discountable = product as? Discountable {
+            return discountable.applyDiscount(discountPercentage)
+        } else {
+            return product.price
+        }
+    }
+}
+
+
+print("Product Details:")
+for product in store {
+    printProductDetails(product)
+}
+
+let discountedPrices = applyStoreWideDiscount(store, discountPercentage: 10)
+print("Discounted prices: \(discountedPrices)")
