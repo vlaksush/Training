@@ -42,6 +42,11 @@ class Painting: CulturalItem {
 // Create some cultural items
 let tajMahal = Monument(name: "Taj Mahal", height: 73)
 let monalisa = Painting(name: "Monalisa", artist: "Leonardo da Vinci")
+let tajMahalRef = tajMahal
+
+if tajMahal === tajMahalRef {
+    //
+}
 
 // Array of cultural items
 let culturalItems: [CulturalItem] = [tajMahal, monalisa]
@@ -56,6 +61,9 @@ for item in culturalItems {
         print("\(item.name) is a painting.")
     }
 }
+let monument = Monument(name: "Taj Mahal", height: 73)
+
+let culturalItem = monument as CulturalItem
 
 print("\nNaina: Now, let's access specific properties with downcasting!")
 

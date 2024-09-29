@@ -17,6 +17,10 @@ for thing in things {
     switch thing {
     case let someInt as Int:
         print("an integer value of \(someInt)")
+//    case is Double:
+//        if let someDouble = thing as? Double, someDouble > 0 {
+//            print("a positive double value of \(someDouble)")
+//        }
     case let someDouble as Double where someDouble > 0:
         print("a positive double value of \(someDouble)")
     case let someString as String:

@@ -37,6 +37,8 @@ do {
     print(result)
 } catch SwiftLensError.unrecognizedMonument {
     print("Oops! We couldn't recognize this monument.")
+} catch SwiftLensError.networkError {
+    print("Oops! Network Error.")
 } catch {
     print("An unexpected error occurred: \(error)")
 }
@@ -65,7 +67,7 @@ try! processImage("india_gate")
 print("\nNaina: Let's handle multiple error cases.")
 
 func saveImage(_ image: String) throws {
-    let freeSpace = 50
+    let freeSpace = 100
     let imageSize = 100
     
     guard freeSpace >= imageSize else {
@@ -103,9 +105,131 @@ Create a function called `authenticateArtifact` that takes a string representing
 
 // Write your solutions here
 
+/*:
+ 
+ ## Solutions
+ 
+ ### Challenge 1: The Artifact Authenticator
+ */
+
+enum AuthenticationError: Error {
+    case unknownArtifact
+    case authenticationFailed
+}
+
+func authenticateArtifact(_ artifact: String) throws -> Bool {
+    let knownArtifacts = ["Kohinoor Diamond", "Ashoka Pillar", "Peacock Throne"]
+    
+    guard knownArtifacts.contains(artifact) else {
+        throw AuthenticationError.unknownArtifact
+    }
+    
+    // Simulating authentication process
+    let isAuthentic = artifact != "Peacock Throne" // Peacock Throne is no longer in India
+    
+    if isAuthentic {
+        return true
+    } else {
+        throw AuthenticationError.authenticationFailed
+    }
+}
+
+print("\nNaina: Let's test our artifact authenticator!")
+
+do {
+    let isAuthentic = try authenticateArtifact("Kohinoor Diamond")
+    print("The Kohinoor Diamond is authentic!")
+} catch AuthenticationError.unknownArtifact {
+    print("Unknown artifact. Not in our database.")
+} catch AuthenticationError.authenticationFailed {
+    print("Authentication failed. This might be a replica.")
+} catch {
+    print("An unexpected error occurred: \(error)")
+}
+
+/*:
+ Explanation:
+ 1. We define custom errors using an enum.
+ 2. The function first checks if the artifact is known, throwing an error if it's not.
+ 3. We simulate an authentication process, throwing an error if it fails.
+ 4. We use do-catch to handle different error cases.
+ 
+ ### Challenge 2: The Museum Curator
+ */
+
 print("\nNaina: Wow, our SwiftLens app is getting really smart at handling errors!")
 print("Karan: Absolutely! We're ready for any curveballs our artifacts might throw at us.")
 
 /*:
 In our next exciting episode, we'll explore Access Control. See you then!
 */
+
+// API Error Handling
+
+import Foundation
+
+// Define the struct to match the JSON structure
+struct IPInfo: Codable {
+    let status: String
+    let country: String
+    let countryCode: String
+    let region: String
+    let regionName: String
+    let city: String
+    let zip: String
+    let lat: Double
+    let lon: Double
+    let timezone: String
+    let isp: String
+    let org: String
+    let `as`: String
+    let query: String
+}
+
+// API call function
+func fetchIPInfo(completion: @escaping (Result<IPInfo, Error>) -> Void) {
+    let apiUrl = URL(string: "http://ip-api.com/json/")!
+    let session = URLSession.shared
+    
+    let task = session.dataTask(with: apiUrl) { (data, response, error) in
+        if let error = error {
+            completion(.failure(error))
+            return
+        }
+        
+        guard let data = data else {
+            completion(.failure(NSError(domain: "NoData", code: 0, userInfo: nil)))
+            return
+        }
+        
+        do {
+            let decoder = JSONDecoder()
+            let ipInfo = try decoder.decode(IPInfo.self, from: data)
+            completion(.success(ipInfo))
+        } catch {
+            completion(.failure(error))
+        }
+    }
+    
+    task.resume()
+}
+
+// Usage
+print("API call initiated. Waiting for response...")
+
+fetchIPInfo { result in
+    switch result {
+    case .success(let ipInfo):
+        print("API Response:")
+        print("Status: \(ipInfo.status)")
+        print("Country: \(ipInfo.country)")
+        print("City: \(ipInfo.city)")
+        print("ISP: \(ipInfo.isp)")
+        print("Latitude: \(ipInfo.lat)")
+        print("Longitude: \(ipInfo.lon)")
+        // ... print other fields as needed
+    case .failure(let error):
+        print("Error: \(error.localizedDescription)")
+    }
+}
+

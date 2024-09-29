@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ZBl-9p-K1v">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Sports-->
+        <scene sceneID="9d7-Eu-xNG">
+            <objects>
+                <viewController id="63r-ab-Ndh" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="4ut-ig-vyn">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="FHt-Ek-7ZG"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Sports" id="8We-0v-oDw"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6P8-jQ-6Wz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="804" y="918"/>
+        </scene>
+        <!--World-->
+        <scene sceneID="Vxo-6V-gLt">
+            <objects>
+                <viewController id="XDY-BQ-sQf" customClass="WorldNewsViewController" customModule="NewsReader" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="dJ1-LS-lJF">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d57-Xa-T5e">
+                                <rect key="frame" x="0.0" y="59" width="393" height="710"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="gNK-XU-VHC">
+                                <rect key="frame" x="186.66666666666666" y="416" width="20" height="20"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="EY5-qw-NXb"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="d57-Xa-T5e" firstAttribute="top" secondItem="EY5-qw-NXb" secondAttribute="top" id="1UN-TU-J9O"/>
+                            <constraint firstItem="gNK-XU-VHC" firstAttribute="centerY" secondItem="dJ1-LS-lJF" secondAttribute="centerY" id="2LG-c8-j8C"/>
+                            <constraint firstItem="EY5-qw-NXb" firstAttribute="bottom" secondItem="d57-Xa-T5e" secondAttribute="bottom" id="H4U-vY-0wL"/>
+                            <constraint firstItem="gNK-XU-VHC" firstAttribute="centerX" secondItem="dJ1-LS-lJF" secondAttribute="centerX" id="jTq-lb-hv2"/>
+                            <constraint firstItem="EY5-qw-NXb" firstAttribute="trailing" secondItem="d57-Xa-T5e" secondAttribute="trailing" id="rMw-5M-hF6"/>
+                            <constraint firstItem="d57-Xa-T5e" firstAttribute="leading" secondItem="EY5-qw-NXb" secondAttribute="leading" id="zcm-sg-zB6"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="World" image="globe" catalog="system" id="a9F-Ux-jer"/>
+                    <connections>
+                        <outlet property="activityIndicator" destination="gNK-XU-VHC" id="lTK-Zo-Jdg"/>
+                        <outlet property="webview" destination="d57-Xa-T5e" id="LgI-9c-gPm"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5ED-0k-ehI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="804" y="312"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="KFa-MS-9ds">
+            <objects>
+                <tabBarController id="ZBl-9p-K1v" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="NcA-qT-xsZ">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="XDY-BQ-sQf" kind="relationship" relationship="viewControllers" id="hDB-qz-VOU"/>
+                        <segue destination="63r-ab-Ndh" kind="relationship" relationship="viewControllers" id="RLR-xU-NmG"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Pr4-RL-5Fj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-102" y="615"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="globe" catalog="system" width="128" height="123"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

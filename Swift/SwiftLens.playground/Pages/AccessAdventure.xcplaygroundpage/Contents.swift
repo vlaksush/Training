@@ -58,7 +58,7 @@ let qutubMinar = Monument(name: "Qutub Minar", year: 1192, hasSecretPassage: fal
 let guide = TourGuide(name: "Amit")
 
 tajMahal.displayInfo() // This works because displayInfo() is public
-// tajMahal.constructionYear // This would not work because constructionYear is private
+//tajMahal.constructionYear // This would not work because constructionYear is private
 
 guide.conductTour(for: tajMahal)
 guide.conductTour(for: qutubMinar)
@@ -126,6 +126,42 @@ Create a `MuseumExhibit` class that has both public and private properties. Incl
 
 Write your solutions below:
 */
+
+/*:
+ Great attempt! Now let's look at the solutions.
+ 
+ ## Solutions
+ 
+ ### Challenge 1: The Secure Artifact Vault
+ */
+
+public class SecureArtifactVault {
+    private var artifacts: [String] = []
+    
+    public func addArtifact(_ artifact: String) {
+        artifacts.append(artifact)
+        print("\(artifact) has been securely added to the vault.")
+    }
+    
+    public func displayArtifactCount() {
+        print("The vault contains \(artifacts.count) artifact(s).")
+    }
+}
+
+print("\nKaran: Let's test our Secure Artifact Vault!")
+let vault = SecureArtifactVault()
+vault.addArtifact("Kohinoor Diamond")
+vault.addArtifact("Peacock Throne")
+vault.displayArtifactCount()
+
+/*:
+ Explanation:
+ 1. The `artifacts` array is private, so it can't be accessed outside the class.
+ 2. `addArtifact(_:)` is public, allowing artifacts to be added from anywhere.
+ 3. `displayArtifactCount()` is public but only shows the count, not the actual artifacts.
+ 
+ ### Challenge 2: The Museum Exhibit
+ */
 
 print("\nKaran: Wow, our SwiftLens app is now well-organized and secure!")
 print("Naina: Absolutely! We're ready to showcase India's cultural heritage to the world.")
