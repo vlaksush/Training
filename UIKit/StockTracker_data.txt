@@ -1,0 +1,78 @@
+ // Step 1
+   
+    var stocks: [(symbol: String, name: String, price: Double)] = [
+        ("RELIANCE", "Reliance Industries Ltd.", 2450.75),
+        ("TCS", "Tata Consultancy Services Ltd.", 3320.50),
+        ("HDFCBANK", "HDFC Bank Ltd.", 1580.25),
+        ("INFY", "Infosys Ltd.", 1620.80),
+        ("HINDUNILVR", "Hindustan Unilever Ltd.", 2680.30),
+        ("ICICIBANK", "ICICI Bank Ltd.", 750.45),
+        ("SBIN", "State Bank of India", 520.90),
+        ("BHARTIARTL", "Bharti Airtel Ltd.", 710.15),
+        ("ITC", "ITC Ltd.", 240.60),
+        ("KOTAKBANK", "Kotak Mahindra Bank Ltd.", 1890.70)]
+
+
+// Step 2
+
+    func setupUI() {
+        self.navigationItem.title = "Indian Stock Tracker"
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationBar.largeTitleTextAttributes = [.foregroundColor: UIColor.systemIndigo]
+        tableView.backgroundColor = .systemBackground
+        tableView.separatorStyle = .none
+        
+        // Add Bar Button
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action:  #selector(refreshButtonTapped))
+    }
+
+    // step 3
+
+        @objc func refreshButtonTapped(_ sender: UIBarButtonItem) {
+        // Simulate price updates
+        for i in 0..<stocks.count {
+            let randomChange = Double.random(in: -5...5)
+            stocks[i].price += randomChange
+        }
+    }
+
+    // step 4
+
+       override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return stocks.count
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "StockCell", for: indexPath)
+        
+        let stock = stocks[indexPath.row]
+        cell.textLabel?.text = "\(stock.name) - \(stock.symbol)"
+        cell.detailTextLabel?.text = "₹\(String(format: "%.2f", stocks[indexPath.row].price))"
+        
+        return cell
+    }
+
+// Step 5
+
+struct Stock {
+    let symbol: String
+    let name: String
+    var price: Double
+}
+
+class StockManager {
+    var stocks = [
+        Stock(symbol: "RELIANCE", name: "Reliance Industries Ltd.", price: 2450.75),
+        Stock(symbol: "TCS", name: "Tata Consultancy Services Ltd.", price: 3320.50),
+        Stock(symbol: "HDFCBANK", name: "HDFC Bank Ltd.", price: 1580.25),
+        Stock(symbol: "INFY", name: "Infosys Ltd.", price: 1620.80),
+        Stock(symbol: "HINDUNILVR", name: "Hindustan Unilever Ltd.", price: 2680.30),
+        Stock(symbol: "ICICIBANK", name: "ICICI Bank Ltd.", price: 750.45),
+        Stock(symbol: "SBIN", name: "State Bank of India", price: 520.90),
+        Stock(symbol: "BHARTIARTL", name: "Bharti Airtel Ltd.", price: 710.15),
+        Stock(symbol: "ITC", name: "ITC Ltd.", price: 240.60),
+        Stock(symbol: "KOTAKBANK", name: "Kotak Mahindra Bank Ltd.", price: 1890.70)
+    ]
+}
+
+
