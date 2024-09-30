@@ -8,7 +8,7 @@
 import UIKit
 import WebKit
 
-class WorldNewsViewController: UIViewController, WKNavigationDelegate {
+class WorldNewsViewController: UIViewController {
 
     @IBOutlet weak var webview: WKWebView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
@@ -25,13 +25,21 @@ class WorldNewsViewController: UIViewController, WKNavigationDelegate {
         webview.navigationDelegate = self
 
     }
-    
-    //MARK: WKNavigationDelegate methods
-    
-    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        activityIndicator.stopAnimating()
-    }
+
     
     //MARK: IBAction methods
 }
+
+extension WorldNewsViewController: WKNavigationDelegate {
+    //MARK: WKNavigationDelegate methods
+    
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+       activityIndicator.stopAnimating()
+    }
+    
+    func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
+        //
+    }
+}
+    
 
