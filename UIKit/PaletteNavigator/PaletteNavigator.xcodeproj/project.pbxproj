@@ -14,6 +14,7 @@
 		482948932CA9963A005957F2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 482948922CA9963A005957F2 /* Assets.xcassets */; };
 		482948962CA9963A005957F2 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 482948952CA9963A005957F2 /* Base */; };
 		4829489E2CA9966B005957F2 /* MyColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4829489D2CA9966B005957F2 /* MyColors.swift */; };
+		482949742CAA7B86005957F2 /* DisplayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482949732CAA7B86005957F2 /* DisplayViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		482948952CA9963A005957F2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		482948972CA9963A005957F2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4829489D2CA9966B005957F2 /* MyColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyColors.swift; sourceTree = "<group>"; };
+		482949732CAA7B86005957F2 /* DisplayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +63,7 @@
 				482948892CA99639005957F2 /* AppDelegate.swift */,
 				4829488B2CA99639005957F2 /* SceneDelegate.swift */,
 				4829488D2CA99639005957F2 /* ColorSelectorViewController.swift */,
+				482949732CAA7B86005957F2 /* DisplayViewController.swift */,
 				4829489D2CA9966B005957F2 /* MyColors.swift */,
 				4829488F2CA99639005957F2 /* Main.storyboard */,
 				482948922CA9963A005957F2 /* Assets.xcassets */,
@@ -141,6 +144,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				482949742CAA7B86005957F2 /* DisplayViewController.swift in Sources */,
 				4829488E2CA99639005957F2 /* ColorSelectorViewController.swift in Sources */,
 				4829489E2CA9966B005957F2 /* MyColors.swift in Sources */,
 				4829488A2CA99639005957F2 /* AppDelegate.swift in Sources */,
