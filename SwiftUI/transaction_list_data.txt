@@ -1,0 +1,163 @@
+// step 1
+
+struct Transaction {
+    let id: UUID
+    let date: Date
+    let amount: Double
+    let description: String
+    let type: TransactionType
+}
+
+enum TransactionType {
+    case credit, debit
+}
+
+// step 2
+
+struct TransactionListView: View {
+    private var transactions: [Transaction] = []
+    
+    var body: some View {
+        NavigationView {
+            List(transactions) { transaction in
+                Text(transaction.description)
+            }
+            .navigationTitle("Transactions")
+        }
+    }
+}
+
+// step 3
+
+Transaction(id: UUID(), date: Date().addingTimeInterval(-86400 * 2), amount: 120.50, description: "Grocery Shopping", type: .debit),
+Transaction(id: UUID(), date: Date().addingTimeInterval(-86400), amount: 1500.00, description: "Salary Deposit", type: .credit),
+Transaction(id: UUID(), date: Date().addingTimeInterval(-43200), amount: 65.00, description: "Restaurant Bill", type: .debit),
+Transaction(id: UUID(), date: Date().addingTimeInterval(-21600), amount: 200.00, description: "ATM Withdrawal", type: .debit),
+Transaction(id: UUID(), date: Date(), amount: 35.99, description: "Online Subscription", type: .debit),
+Transaction(id: UUID(), date: Date().addingTimeInterval(-129600), amount: 520.00, description: "Rent Payment", type: .debit),
+Transaction(id: UUID(), date: Date().addingTimeInterval(-172800), amount: 50.00, description: "Friend Transfer", type: .credit),
+Transaction(id: UUID(), date: Date().addingTimeInterval(-259200), amount: 80.75, description: "Utility Bill", type: .debit),
+Transaction(id: UUID(), date: Date().addingTimeInterval(-345600), amount: 160.00, description: "Clothing Purchase", type: .debit),
+Transaction(id: UUID(), date: Date().addingTimeInterval(-432000), amount: 1000.00, description: "Bonus Payment", type: .credit)
+
+// step 4
+
+          Text(transaction.description)
+                    .font(.headline)
+                Text(transaction.date, style: .date)
+                    .font(.subheadline)
+                    .foregroundColor(.secondary)
+
+
+// step 5
+Text(String(format: "$%.2f", transaction.amount))
+    .foregroundColor(transaction.type == .credit ? .green : .red)
+
+// step 6
+   HStack {
+                    VStack(alignment: .leading) {
+                        Text(transaction.description)
+                            .font(.headline)
+                        Text(transaction.date, style: .date)
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                    }
+                    Spacer()
+                    Text(String(format: "$%.2f", transaction.amount))
+                        .foregroundColor(transaction.type == .credit ? .green : .red)
+                }
+
+
+// setp 7
+
+Text(transaction.description)
+    .font(.title)
+Text(transaction.date, style: .date)
+Text(String(format: "$%.2f", transaction.amount))
+    .font(.title2)
+    .foregroundColor(transaction.type == .credit ? .green : .red)
+Text("Type: \(transaction.type == .credit ? "Credit" : "Debit")")
+
+// step 8
+
+    private func loadTransactions() {
+        // Simulate API call
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            self.transactions = [
+                Transaction(id: UUID(), date: Date().addingTimeInterval(-86400 * 2), amount: 120.50, description: "Grocery Shopping", type: .debit),
+                Transaction(id: UUID(), date: Date().addingTimeInterval(-86400), amount: 1500.00, description: "Salary Deposit", type: .credit),
+                Transaction(id: UUID(), date: Date().addingTimeInterval(-43200), amount: 65.00, description: "Restaurant Bill", type: .debit),
+                Transaction(id: UUID(), date: Date().addingTimeInterval(-21600), amount: 200.00, description: "ATM Withdrawal", type: .debit),
+                Transaction(id: UUID(), date: Date(), amount: 35.99, description: "Online Subscription", type: .debit),
+                Transaction(id: UUID(), date: Date().addingTimeInterval(-129600), amount: 520.00, description: "Rent Payment", type: .debit),
+                Transaction(id: UUID(), date: Date().addingTimeInterval(-172800), amount: 50.00, description: "Friend Transfer", type: .credit),
+                Transaction(id: UUID(), date: Date().addingTimeInterval(-259200), amount: 80.75, description: "Utility Bill", type: .debit),
+                Transaction(id: UUID(), date: Date().addingTimeInterval(-345600), amount: 160.00, description: "Clothing Purchase", type: .debit),
+                Transaction(id: UUID(), date: Date().addingTimeInterval(-432000), amount: 1000.00, description: "Bonus Payment", type: .credit)
+            ]
+        }
+    }
+
+    // step 9
+
+     @State private var transactions: [Transaction] = []
+
+     // step 10
+
+                    NavigationLink(destination: TransactionDetailView(transaction: transaction)) {
+                    TransactionRowView(transaction: transaction)
+                }
+
+    
+    // step 11
+
+    @Environment(\.dismiss) var dismiss
+    @Binding var transactions: [Transaction]
+
+    // step 12
+
+    @State private var amount: String = ""
+    @State private var description: String = ""
+    @State private var type: TransactionType = .debit
+    @State private var date: Date = Date()
+
+    // step 13
+
+Section(header: Text("Transaction Details")) {
+                    TextField("Amount", text: $amount)
+                        .keyboardType(.decimalPad)
+                    TextField("Description", text: $description)
+                    Picker("Type", selection: $type) {
+                        Text("Debit").tag(TransactionType.debit)
+                        Text("Credit").tag(TransactionType.credit)
+                    }
+                    .pickerStyle(SegmentedPickerStyle())
+                    DatePicker("Date", selection: $date, displayedComponents: .date)
+                }
+
+    // step 14
+
+
+    private func saveTransaction() {
+        guard let amountValue = Double(amount), !description.isEmpty else { return }
+        
+        let newTransaction = Transaction(
+            id: UUID(),
+            date: date,
+            amount: amountValue,
+            description: description,
+            type: type
+        )
+        
+        transactions.append(newTransaction)
+        dismiss()
+    }
+
+
+
+// step 15
+     .navigationBarItems(trailing: Button(action: {
+                    isShowingAddTransaction = true
+                }) {
+                    Image(systemName: "plus")
+                })
