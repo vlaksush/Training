@@ -7,17 +7,17 @@
 
 import SwiftUI
 
-struct LapTime: Identifiable, Hashable {
-    var id = UUID()
-    var timeString: String
-}
+//struct LapTime: Identifiable, Hashable {
+//    var id = UUID()
+//    var timeString: String
+//}
 
 struct ContentView: View {
     @State private var elapsedTime: TimeInterval = 0
     @State private var timer: Timer?
     @State private var isRunning = false
     @State private var lapTimes: [TimeInterval] = []
-    @State private var laps: [LapTime] = []
+  //  @State private var laps: [LapTime] = []
     
     var body: some View {
         VStack {
@@ -122,7 +122,7 @@ struct ContentView: View {
     
     func recordLapTime() {
         lapTimes.insert(elapsedTime, at: 0)
-        laps.append(LapTime(timeString: timeString(from: elapsedTime)))
+     //   laps.append(LapTime(timeString: timeString(from: elapsedTime)))
         
     }
     
