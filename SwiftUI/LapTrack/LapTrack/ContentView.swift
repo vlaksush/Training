@@ -97,8 +97,13 @@ struct ContentView: View {
                             .font(.system(.body, design: .monospaced))
                     }
                 }
+                .onDelete(perform:deleteLap)
             }
         }
+    }
+    
+    private func deleteLap(offsets: IndexSet) {
+        lapTimes.remove(atOffsets: offsets)
     }
     
     func startTimer() {
