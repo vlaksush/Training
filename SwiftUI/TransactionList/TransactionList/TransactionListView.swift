@@ -23,6 +23,7 @@ enum TransactionType {
 struct TransactionListView: View {
     @State private var transactions: [Transaction] = []
     @State private var isShowingAddTransaction = false
+    @State private var lastTransactionState = false
     
     var body: some View {
         NavigationView {
@@ -37,9 +38,11 @@ struct TransactionListView: View {
             }) {
                 Image(systemName: "plus")
             })
+            
         }
         .onAppear {
             loadTransactions()
+            print($isShowingAddTransaction)
         }
         .refreshable {
             loadTransactions()
@@ -47,7 +50,17 @@ struct TransactionListView: View {
         .sheet(isPresented: $isShowingAddTransaction) {
             AddTransactionView(transactions: $transactions)
         }
+        .onChange(of: isShowingAddTransaction) { newValue in
+            print("isShowingAddTransaction changed to: \(newValue)")
+            if lastTransactionState != newValue {
+                lastTransactionState = newValue
+                if !newValue {
+                    print("Sheet was dismissed!")
+                }
+            }
+        }
     }
+    
     
     private func loadTransactions() {
         // Simulate API call

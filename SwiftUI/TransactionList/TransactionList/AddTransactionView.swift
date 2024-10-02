@@ -18,8 +18,12 @@ struct AddTransactionView: View {
     @State private var date: Date = Date()
     
     var body: some View {
-        NavigationView {
             VStack {
+                Text("Add Transaction")
+                    .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+                    .fontWeight(.bold)
+                    .frame(minWidth:0, maxWidth: .infinity, alignment: .leading)
+                    .padding()
                 Form {
                     Section(header:Text("Transaction Details")) {
                         TextField("Amount", text: $amount)
@@ -32,14 +36,19 @@ struct AddTransactionView: View {
                         .pickerStyle(SegmentedPickerStyle())
                         DatePicker("Date", selection: $date, displayedComponents: .date)
                     }
+                    Section() {
+                        HStack {
+                            Button("Save") {
+                                saveTransaction()
+                            }
+                            Spacer()
+                            Button("Cancel") {
+                                dismiss()
+                            }
+                        }
+                    }
                 }
             }
-            .navigationTitle("Add Transaction")
-            .navigationBarItems(
-                leading: Button("Cancel") { dismiss() },
-                trailing: Button("Save") { saveTransaction() }
-            )
-        }
     }
     
     private func saveTransaction() {
@@ -61,3 +70,4 @@ struct AddTransactionView: View {
 #Preview {
     AddTransactionView(transactions: .constant([Transaction]()))
 }
+

@@ -22,6 +22,7 @@ struct TransactionDetailView: View {
             Text("Type: \(transaction.type == .credit ? "Credit" : "Debit")")
             Spacer()
         }
+        .navigationTitle("Transaction Detail")
     }
 }
 
