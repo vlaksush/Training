@@ -13,6 +13,8 @@
 		488CD6EE2CAE72E600A19529 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 488CD6ED2CAE72E600A19529 /* Preview Assets.xcassets */; };
 		488CD6F02CAE72E600A19529 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488CD6EF2CAE72E600A19529 /* Persistence.swift */; };
 		488CD6F32CAE72E600A19529 /* PersonalJournal.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 488CD6F12CAE72E600A19529 /* PersonalJournal.xcdatamodeld */; };
+		488CD6FA2CAE8B2500A19529 /* AddJournalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488CD6F92CAE8B2500A19529 /* AddJournalView.swift */; };
+		488CD6FC2CAE90FD00A19529 /* JournalEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488CD6FB2CAE90FD00A19529 /* JournalEntryView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +25,8 @@
 		488CD6ED2CAE72E600A19529 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		488CD6EF2CAE72E600A19529 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		488CD6F22CAE72E600A19529 /* PersonalJournal.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PersonalJournal.xcdatamodel; sourceTree = "<group>"; };
+		488CD6F92CAE8B2500A19529 /* AddJournalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddJournalView.swift; sourceTree = "<group>"; };
+		488CD6FB2CAE90FD00A19529 /* JournalEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalEntryView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,10 +61,12 @@
 			children = (
 				488CD6E62CAE72E400A19529 /* PersonalJournalApp.swift */,
 				488CD6E82CAE72E400A19529 /* ContentView.swift */,
+				488CD6F92CAE8B2500A19529 /* AddJournalView.swift */,
 				488CD6EA2CAE72E600A19529 /* Assets.xcassets */,
 				488CD6EF2CAE72E600A19529 /* Persistence.swift */,
 				488CD6F12CAE72E600A19529 /* PersonalJournal.xcdatamodeld */,
 				488CD6EC2CAE72E600A19529 /* Preview Content */,
+				488CD6FB2CAE90FD00A19529 /* JournalEntryView.swift */,
 			);
 			path = PersonalJournal;
 			sourceTree = "<group>";
@@ -146,7 +152,9 @@
 				488CD6F02CAE72E600A19529 /* Persistence.swift in Sources */,
 				488CD6E92CAE72E400A19529 /* ContentView.swift in Sources */,
 				488CD6E72CAE72E400A19529 /* PersonalJournalApp.swift in Sources */,
+				488CD6FC2CAE90FD00A19529 /* JournalEntryView.swift in Sources */,
 				488CD6F32CAE72E600A19529 /* PersonalJournal.xcdatamodeld in Sources */,
+				488CD6FA2CAE8B2500A19529 /* AddJournalView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
