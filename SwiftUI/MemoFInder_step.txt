@@ -1,0 +1,267 @@
+// Memo Finder
+
+// Step 1
+
+protocol NoteStorageProtocol {
+    func saveNote(_ note: Note) throws
+    func loadNotes() throws -> [Note]
+    func deleteNote(_ note: Note) throws
+    func updateNote(_ note: Note) throws
+}
+
+// step 2 - create a new class In memory Note Storage
+
+class InMemoryNoteStorage: NoteStorageProtocol {
+    private var notes: [Note] = []
+    
+    func saveNote(_ note: Note) throws {
+        if let index = notes.firstIndex(where: { $0.id == note.id }) {
+            notes[index] = note
+        } else {
+            notes.append(note)
+        }
+    }
+    
+    func loadNotes() throws -> [Note] {
+        return notes
+    }
+    
+    func deleteNote(_ note: Note) throws {
+        notes.removeAll { $0.id == note.id }
+    }
+    
+    func updateNote(_ note: Note) throws {
+        if let index = notes.firstIndex(where: { $0.id == note.id }) {
+            notes[index] = note
+        } else {
+            throw NSError(domain: "NoteStorage", code: 1, userInfo: [NSLocalizedDescriptionKey: "Note not found"])
+        }
+    }
+}
+
+// Step 3 - Update NotesViewModel
+
+class NoteViewModel: ObservableObject {
+    @Published var notes: [Note] = []
+    @Published var sortOrder: SortOrder = .dateCreated
+    
+    private let storage: NoteStorageProtocol
+    
+    init(storage: NoteStorageProtocol? = nil) {
+          if let providedStorage = storage {
+              self.storage = providedStorage
+          } else {
+            self.storage = InMemoryNoteStorage()
+          }
+          loadNotes()
+      }
+      
+    
+    enum SortOrder: String, CaseIterable {
+        case dateCreated = "Date Created"
+        case title = "Title"
+    }
+    
+    var sortedNotes: [Note] {
+        switch sortOrder {
+        case .dateCreated:
+            return notes.sorted { $0.createdAt > $1.createdAt }
+        case .title:
+            return notes.sorted { $0.title.lowercased() < $1.title.lowercased() }
+        }
+    }
+    
+    func addNote(_ note: Note) {
+        do {
+            try storage.saveNote(note)
+            loadNotes()
+        } catch {
+            print("Error Saving note:\(error)")
+        }
+    }
+    
+    func updateNote(_ note: Note) {
+        do {
+            try storage.updateNote(note)
+            loadNotes()
+        } catch {
+            print("Error updating note: \(error)")
+        }
+    }
+    
+    func deleteNote(_ note: Note) {
+        do {
+            try storage.deleteNote(note)
+            loadNotes()
+        } catch {
+            print("Error deleting note: \(error)")
+        }
+    }
+    
+    private func loadNotes() {
+        do {
+            notes = try storage.loadNotes()
+        } catch {
+            print("Error loading notes: \(error)")
+        }
+    }
+}
+
+// Step 4 - Update ContentView, remove private 
+
+ @StateObject var noteViewModel = NoteViewModel()
+
+
+// Step 5 - add enum for storage in MemoFinderApp
+
+enum StorageType {
+    case fileSystem
+    case swiftData
+    case inMemory
+}
+
+// step 6 - create view model 
+
+    private func createViewModel(storageType: StorageType) -> NoteViewModel {
+        let storage: NoteStorageProtocol
+        
+        switch storageType {
+        case .inMemory:
+            storage = InMemoryNoteStorage()
+        default:
+            storage = InMemoryNoteStorage()
+        }
+        
+        return NoteViewModel(storage: storage)
+    }
+
+    // App should work - in memory check point.
+
+    // Step 7 - Add File System Note Storage
+
+    import Foundation
+
+class FileSystemNoteStorage: NoteStorageProtocol {
+    private let fileManager = FileManager.default
+    private let notesDirectory: URL
+    
+    init() throws {
+        let documentsDirectory = try fileManager.url(for: .documentDirectory, 
+                                                     in: .userDomainMask, appropriateFor: nil, create: true)
+        notesDirectory = documentsDirectory.appendingPathComponent("Notes", isDirectory: true)
+        try fileManager.createDirectory(at: notesDirectory, withIntermediateDirectories: true, attributes: nil)
+    }
+    
+    func saveNote(_ note: Note) throws {
+        let noteURL = notesDirectory.appendingPathComponent("\(note.id.uuidString).json")
+        let data = try JSONEncoder().encode(note)
+        try data.write(to: noteURL)
+    }
+    
+    func loadNotes() throws -> [Note] {
+        let noteURLs = try fileManager.contentsOfDirectory(at: notesDirectory, includingPropertiesForKeys: nil)
+        return try noteURLs.compactMap { url in
+            let data = try Data(contentsOf: url)
+            return try JSONDecoder().decode(Note.self, from: data)
+        }
+    }
+    
+    func deleteNote(_ note: Note) throws {
+        let noteURL = notesDirectory.appendingPathComponent("\(note.id.uuidString).json")
+        try fileManager.removeItem(at: noteURL)
+    }
+    
+    func updateNote(_ note: Note) throws {
+        try saveNote(note)
+    }
+}
+
+// step 7 - update switch case in MemoFinderApp file 
+
+case .fileSystem:
+do {
+    storage = try FileSystemNoteStorage()
+} catch {
+    print("Failed to initialize FileSystemNoteStorage, falling back to in-memory storage: \(error)")
+    storage = InMemoryNoteStorage()
+}
+
+// step 8 - Add Swift Data
+
+import Foundation
+import SwiftData
+
+@Model
+final class SwiftDataNote: Identifiable {
+    let id: UUID
+    var title: String
+    var content: String
+    var createdAt: Date
+    
+    init(id: UUID = UUID(), title: String, content: String, createdAt: Date = Date()) {
+        self.id = id
+        self.title = title
+        self.content = content
+        self.createdAt = createdAt
+    }
+}
+
+class SwiftDataNoteStorage: NoteStorageProtocol {
+    private var modelContext: ModelContext
+    
+    init(modelContainer: ModelContainer) {
+        self.modelContext = ModelContext(modelContainer)
+    }
+    
+    func saveNote(_ note: Note) throws {
+        let swiftDataNote = SwiftDataNote(from: note)
+        modelContext.insert(swiftDataNote)
+        try modelContext.save()
+    }
+    
+    func loadNotes() throws -> [Note] {
+        let descriptor = FetchDescriptor<SwiftDataNote>(sortBy: [SortDescriptor(\.createdAt, order: .reverse)])
+        let swiftDataNotes = try modelContext.fetch(descriptor)
+        return swiftDataNotes.map { $0.toNote() }
+    }
+    
+    func deleteNote(_ note: Note) throws {
+        let descriptor = FetchDescriptor<SwiftDataNote>(predicate: #Predicate { $0.id == note.id })
+        let swiftDataNotes = try modelContext.fetch(descriptor)
+        if let swiftDataNote = swiftDataNotes.first {
+            modelContext.delete(swiftDataNote)
+            try modelContext.save()
+        }
+    }
+    
+    func updateNote(_ note: Note) throws {
+        let descriptor = FetchDescriptor<SwiftDataNote>(predicate: #Predicate { $0.id == note.id })
+        let swiftDataNotes = try modelContext.fetch(descriptor)
+        if let swiftDataNote = swiftDataNotes.first {
+            swiftDataNote.title = note.title
+            swiftDataNote.content = note.content
+            try modelContext.save()
+        }
+    }
+}
+
+extension SwiftDataNote {
+    convenience init(from note: Note) {
+        self.init(id: note.id, title: note.title, content: note.content, createdAt: note.createdAt)
+    }
+    
+    func toNote() -> Note {
+        Note(id: self.id, title: self.title, content: self.content, createdAt: self.createdAt)
+    }
+}
+
+// step 9 - Update Swift case to include Swift Data
+
+   case .swiftData:
+            do {
+                let container = try ModelContainer(for: SwiftDataNote.self)
+                storage = SwiftDataNoteStorage(modelContainer: container)
+            } catch {
+                print("Failed to initialize SwiftDataNoteStorage, falling back to in-memory storage: \(error)")
+                storage = InMemoryNoteStorage()
+            }

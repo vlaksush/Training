@@ -26,6 +26,6 @@ struct JournalEntryView: View {
     }
 }
 
-//#Preview {
-//    JournalEntryView()
-//}
+#Preview {
+    JournalEntryView(entry: PersistenceController.testEntry)
+}

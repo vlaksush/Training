@@ -1,0 +1,139 @@
+// step 1 - Add Form control in JournalEntryView
+
+Form {
+    Section(header: Text("Title")) {
+        TextField("Enter title", text: $title)
+    }
+
+    Section(header: Text("Date")) {
+        DatePicker("Entry Date", selection: $date, displayedComponents: .date)
+    }
+
+    Section(header: Text("Content")) {
+        TextEditor(text: $content)
+            .frame(minHeight: 200)
+    }
+}
+
+// step 2 - Add Toolbar
+
+   .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button("Save") {
+                    //
+                    dismiss()
+                }
+            }
+        }
+
+// step 3 - Add all the state variables and initialzer in JournalEntryView
+
+    
+    @StateObject var entry: JournalEntry
+    
+    @State private var title: String
+    @State private var content: String
+    @State private var date: Date
+    
+    init(entity: JournalEntry) {
+        self.title = entity.title ?? ""
+        self.content = entity.content ?? ""
+        self.date = entity.date ?? Date()
+        _entry = StateObject(wrappedValue: entity)
+    }
+    
+// step 4 - dismiss action
+
+   @Environment (\.dismiss) private var dismiss
+
+// Step 5 - create groups for Views and ViewModels
+
+// step 6 - create JournalViewModel
+
+class JournalViewModel: ObservableObject {
+        @Published var entries: [JournalEntry] = []
+}
+
+// step 7 - add viewContext and initializers
+
+    private var viewContext: NSManagedObjectContext
+
+    init(viewContext: NSManagedObjectContext) {
+        self.viewContext = viewContext
+        fetchEntries()
+    }
+
+// step 8 - addEntry
+
+  func addEntry(title: String, content: String) {
+        let newEntry = JournalEntry(context: viewContext)
+        newEntry.title = title
+        newEntry.content = content
+        newEntry.date = Date()
+        saveContext()
+    }
+
+    // step 9 - Add saveContext
+
+    private func saveContext() {
+        do {
+            try viewContext.save()
+            fetchEntries()
+        } catch {
+            print("Error saving context: \(error)")
+        }
+    }
+
+// step 10 - Update ContentView, AddJournalView to use ViewModel
+
+    @ObservedObject var entries: JournalViewModel
+
+// step 11 - Then add Swipe actions in ContentView
+
+    .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                    Button(role: .destructive) {
+                        deleteEntry(entry: entry)
+                    } label: {
+                        Label("Delete", systemImage: "trash")
+                    }
+                }
+
+        func deleteEntry(entry: JournalEntry) {
+        viewModel.deleteEntry(entry)
+    }
+
+// step 12 - Then add deleteEntry, updateEntry 
+
+   func updateEntry(_ entry: JournalEntry, title: String, content: String) {
+        entry.title = title
+        entry.content = content
+        entry.date = Date()
+        saveContext()
+    }
+    
+    func deleteEntry(_ entry: JournalEntry) {
+        viewContext.delete(entry)
+        saveContext()
+    }
+
+**************** MVVM *************
+
+1. rename ContentView to JournalListView 
+
+2. Add New File ContenView and SettingsView
+
+3. In ContentView add tabbar bar
+
+        TabView {
+            JournalListView(viewModel: journalViewModel)
+                .tabItem {
+                    Label("Journal", systemImage: "book.fill")
+                }
+            
+            SettingsView()
+                .tabItem {
+                    Label("Settings", systemImage: "gear")
+                }
+        }
+
+4. Create NotificaitonManager class
