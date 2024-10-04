@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @StateObject var journalViewModel: JournalViewModel
-    @ObservedObject var settingsViewModel = SettingsViewModel()
+    @ObservedObject var settingsViewModel: SettingsViewModel = SettingsViewModel()
     
     var body: some View {
         TabView {
@@ -17,7 +17,7 @@ struct ContentView: View {
                        .tabItem {
                            Label("Journal", systemImage: "book.fill")
                        }
-                   SettingsView()
+                   SettingsView(viewModel: settingsViewModel)
                        .tabItem {
                            Label("Settings", systemImage: "gear")
                        }
@@ -28,7 +28,7 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView(journalViewModel: JournalViewModel(viewContext: PersistenceController.preview.container.viewContext))
+    ContentView(journalViewModel: JournalViewModel(viewContext: PersistenceController.preview.container.viewContext), settingsViewModel: SettingsViewModel())
 }
 
 
