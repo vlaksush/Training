@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @StateObject private var settingsViewModel = SettingsViewModel()
-    @StateObject private var noteViewModel = NoteViewModel()
+    @ObservedObject var noteViewModel: NoteViewModel
     @State private var isShowingNewNoteView = false
     
     var body: some View {
@@ -79,5 +79,5 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    ContentView(noteViewModel: NoteViewModel())
 }

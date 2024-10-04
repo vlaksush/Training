@@ -7,6 +7,13 @@
 
 import SwiftUI
 
+protocol NoteStorageProtocol {
+    func saveNote(_ note: Note) throws
+    func loadNotes() throws -> [Note]
+    func deleteNote(_ note: Note) throws
+    func updateNote(_ note: Note) throws
+}
+
 struct Note: Identifiable {
     let id: UUID
     var title: String
@@ -17,6 +24,18 @@ struct Note: Identifiable {
 class NoteViewModel: ObservableObject {
     @Published var notes: [Note] = []
     @Published var sortOrder: SortOrder = .dateCreated
+    
+    private let storage: NoteStorageProtocol
+    
+    init(storage: NoteStorageProtocol? = nil) {
+          if let providedStorage = storage {
+              self.storage = providedStorage
+          } else {
+            self.storage = InMemoryNoteStorage()
+          }
+          loadNotes()
+      }
+      
     
     enum SortOrder: String, CaseIterable {
         case dateCreated = "Date Created"
@@ -33,17 +52,39 @@ class NoteViewModel: ObservableObject {
     }
     
     func addNote(_ note: Note) {
-        notes.append(note)
+        do {
+            try storage.saveNote(note)
+            loadNotes()
+        } catch {
+            print("Error Saving note:\(error)")
+        }
     }
     
     func updateNote(_ note: Note) {
-        if let index = notes.firstIndex(where: { $0.id == note.id }) {
-            notes[index] = note
+        do {
+            try storage.updateNote(note)
+            loadNotes()
+        } catch {
+            print("Error updating note: \(error)")
         }
     }
     
     func deleteNote(_ note: Note) {
-        notes.removeAll { $0.id == note.id }
+        do {
+            try storage.deleteNote(note)
+            loadNotes()
+        } catch {
+            print("Error deleting note: \(error)")
+        }
+    }
+    
+    private func loadNotes() {
+        do {
+            notes = try storage.loadNotes()
+        } catch {
+            print("Error loading notes: \(error)")
+        }
     }
 }
+
 
