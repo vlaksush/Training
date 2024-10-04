@@ -18,7 +18,7 @@ struct MemoFinderApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView(noteViewModel: createViewModel(storageType: .inMemory))
+            ContentView(noteViewModel: createViewModel(storageType: .fileSystem))
         }
     }
     
@@ -28,6 +28,13 @@ struct MemoFinderApp: App {
         switch storageType {
         case .inMemory:
             storage = InMemoryNoteStorage()
+        case .fileSystem:
+            do {
+                storage = try FileSystemNoteStorage()
+            } catch {
+                print("Failed to initialize FileSystemNoteStorage, falling back to in-memory storage: \(error)")
+                storage = InMemoryNoteStorage()
+            }
         default:
             storage = InMemoryNoteStorage()
         }

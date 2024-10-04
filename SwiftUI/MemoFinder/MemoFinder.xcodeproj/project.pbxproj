@@ -16,6 +16,7 @@
 		4855376D2CAF5EE10038410C /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4855376C2CAF5EE10038410C /* SettingsView.swift */; };
 		485537712CAF604D0038410C /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485537702CAF604D0038410C /* SettingsViewModel.swift */; };
 		4855379E2CAFC66E0038410C /* InMemoryNoteStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4855379D2CAFC66E0038410C /* InMemoryNoteStorage.swift */; };
+		485537A02CAFDB4B0038410C /* FileSystemNoteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4855379F2CAFDB4B0038410C /* FileSystemNoteManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +30,7 @@
 		4855376C2CAF5EE10038410C /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		485537702CAF604D0038410C /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		4855379D2CAFC66E0038410C /* InMemoryNoteStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InMemoryNoteStorage.swift; sourceTree = "<group>"; };
+		4855379F2CAFDB4B0038410C /* FileSystemNoteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSystemNoteManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +104,7 @@
 			isa = PBXGroup;
 			children = (
 				4855379D2CAFC66E0038410C /* InMemoryNoteStorage.swift */,
+				4855379F2CAFDB4B0038410C /* FileSystemNoteManager.swift */,
 			);
 			path = StorageManager;
 			sourceTree = "<group>";
@@ -180,6 +183,7 @@
 				4855375D2CAF5E330038410C /* ContentView.swift in Sources */,
 				4855375B2CAF5E330038410C /* MemoFinderApp.swift in Sources */,
 				485537692CAF5E570038410C /* NoteViewModel.swift in Sources */,
+				485537A02CAFDB4B0038410C /* FileSystemNoteManager.swift in Sources */,
 				4855376B2CAF5EA80038410C /* NoteDetailView.swift in Sources */,
 				4855379E2CAFC66E0038410C /* InMemoryNoteStorage.swift in Sources */,
 				485537712CAF604D0038410C /* SettingsViewModel.swift in Sources */,

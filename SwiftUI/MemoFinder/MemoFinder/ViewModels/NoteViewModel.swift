@@ -14,7 +14,7 @@ protocol NoteStorageProtocol {
     func updateNote(_ note: Note) throws
 }
 
-struct Note: Identifiable {
+struct Note: Identifiable, Codable {
     let id: UUID
     var title: String
     var content: String
