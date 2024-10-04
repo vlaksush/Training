@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 
 @main
 struct MemoFinderApp: App {
@@ -18,7 +19,7 @@ struct MemoFinderApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView(noteViewModel: createViewModel(storageType: .fileSystem))
+            ContentView(noteViewModel: createViewModel(storageType: .swiftData))
         }
     }
     
@@ -35,10 +36,15 @@ struct MemoFinderApp: App {
                 print("Failed to initialize FileSystemNoteStorage, falling back to in-memory storage: \(error)")
                 storage = InMemoryNoteStorage()
             }
-        default:
-            storage = InMemoryNoteStorage()
+        case .swiftData:
+            do {
+                let container = try ModelContainer(for: SwiftDataNote.self)
+                storage = SwiftDataNoteStorage(modelContainer: container)
+            } catch {
+                print("Failed to initialize SwiftDataNoteStorage, falling back to in-memory storage: \(error)")
+                storage = InMemoryNoteStorage()
+            }
         }
-        
         return NoteViewModel(storage: storage)
     }
 }

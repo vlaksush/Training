@@ -17,6 +17,7 @@
 		485537712CAF604D0038410C /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485537702CAF604D0038410C /* SettingsViewModel.swift */; };
 		4855379E2CAFC66E0038410C /* InMemoryNoteStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4855379D2CAFC66E0038410C /* InMemoryNoteStorage.swift */; };
 		485537A02CAFDB4B0038410C /* FileSystemNoteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4855379F2CAFDB4B0038410C /* FileSystemNoteManager.swift */; };
+		485537A22CAFDEBE0038410C /* SwiftDataNoteStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485537A12CAFDEBE0038410C /* SwiftDataNoteStorage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,7 @@
 		485537702CAF604D0038410C /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		4855379D2CAFC66E0038410C /* InMemoryNoteStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InMemoryNoteStorage.swift; sourceTree = "<group>"; };
 		4855379F2CAFDB4B0038410C /* FileSystemNoteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSystemNoteManager.swift; sourceTree = "<group>"; };
+		485537A12CAFDEBE0038410C /* SwiftDataNoteStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataNoteStorage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +107,7 @@
 			children = (
 				4855379D2CAFC66E0038410C /* InMemoryNoteStorage.swift */,
 				4855379F2CAFDB4B0038410C /* FileSystemNoteManager.swift */,
+				485537A12CAFDEBE0038410C /* SwiftDataNoteStorage.swift */,
 			);
 			path = StorageManager;
 			sourceTree = "<group>";
@@ -179,6 +182,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				485537A22CAFDEBE0038410C /* SwiftDataNoteStorage.swift in Sources */,
 				4855376D2CAF5EE10038410C /* SettingsView.swift in Sources */,
 				4855375D2CAF5E330038410C /* ContentView.swift in Sources */,
 				4855375B2CAF5E330038410C /* MemoFinderApp.swift in Sources */,
