@@ -9,11 +9,12 @@ import SwiftUI
 
 @main
 struct PersonalJournalApp: App {
+    
     let persistenceController = PersistenceController.shared
 
     var body: some Scene {
         WindowGroup {
-            ContentView(viewModel: JournalViewModel(viewContext: persistenceController.container.viewContext))
+            ContentView(journalViewModel: JournalViewModel(viewContext: persistenceController.container.viewContext),settingsViewModel: SettingsViewModel())
         }
     }
 }
