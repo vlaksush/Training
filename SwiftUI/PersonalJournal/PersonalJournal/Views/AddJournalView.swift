@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AddJournalView: View {
-    @Environment(\.managedObjectContext) private var viewContext
+    @StateObject var viewModel: JournalViewModel
     @Environment(\.dismiss) private var dismiss
     
     @State private var journalTitle: String = ""
@@ -26,7 +26,7 @@ struct AddJournalView: View {
             .toolbar{
                 ToolbarItem(placement:.bottomBar) {
                     Button("Save") {
-                        addEntry()
+                        viewModel.addEntry(title: journalTitle, content: content)
                         dismiss()
                     }
                 }
@@ -36,22 +36,11 @@ struct AddJournalView: View {
                     }
                 }
             }
-        }
-    }
-    
-    func addEntry() {
-        let entry = JournalEntry(context: viewContext) 
-        entry.title = journalTitle
-        entry.content = content
-        entry.date = Date()
-        do {
-            try viewContext.save()
-        } catch {
-            //
+            .navigationTitle("Add Journal")
         }
     }
 }
 
-#Preview {
-    AddJournalView()
-}
+//#Preview {
+//    AddJournalView()
+//}

@@ -137,3 +137,152 @@ class JournalViewModel: ObservableObject {
         }
 
 4. Create NotificaitonManager class
+
+class NotificationManager {
+    
+    static let shared = NotificationManager()
+    
+    func requestAuthorization() {
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { granted, error in
+            if granted {
+                print("Notification authorization granted")
+            } else if let error = error {
+                print("Error requesting notification authorization: \(error.localizedDescription)")
+            }
+        }
+    }
+}
+
+5 Add other notificationmanager class methods
+
+  func scheduleDaily(at time: Date, title: String, body: String) {
+        let content = UNMutableNotificationContent()
+        content.title = title
+        content.body = body
+        content.sound = .default
+        
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.hour, .minute], from: time)
+        let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: true)
+        
+        let request = UNNotificationRequest(identifier: "dailyReminder", content: content, trigger: trigger)
+        
+        UNUserNotificationCenter.current().add(request) { error in
+            if let error = error {
+                print("Error scheduling notification: \(error.localizedDescription)")
+            }
+        }
+    }
+
+    func cancelAllNotifications() {
+        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+    }
+
+6 Add SettingsViewModel
+
+class  SettingsViewModel: ObservableObject {
+    
+    @Published var isDarkModeEnabled: Bool {
+        didSet {
+            UserDefaults.standard.set(isDarkModeEnabled, forKey: "isDarkModeEnabled")
+        }
+    }
+    
+    @Published var reminderTime: Date {
+        didSet {
+            UserDefaults.standard.set(reminderTime, forKey: "reminderTime")
+            scheduleReminder()
+        }
+    }
+    
+    @Published var isReminderEnabled: Bool {
+        didSet {
+            UserDefaults.standard.set(isReminderEnabled, forKey: "isReminderEnabled")
+            if isReminderEnabled {
+                scheduleReminder()
+            } else {
+                NotificationManager.shared.cancelAllNotifications()
+            }
+        }
+    }
+    
+    init() {
+        self.isDarkModeEnabled = UserDefaults.standard.bool(forKey: "isDarkModeEnabled")
+        self.reminderTime = UserDefaults.standard.object(forKey: "reminderTime") as? Date ?? Date()
+        self.isReminderEnabled = UserDefaults.standard.bool(forKey: "isReminderEnabled")
+        
+        NotificationManager.shared.requestAuthorization()
+    }
+    
+    private func scheduleReminder() {
+        guard isReminderEnabled else { return }
+        NotificationManager.shared.scheduleDaily(at: reminderTime, title: "Journal Reminder", body: "It's time to write in your journal!")
+    }
+}
+
+7 Settings View 
+
+struct SettingsView: View {
+    
+    @ObservedObject var viewModel: SettingsViewModel
+    
+    var appVersion: String {
+        if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
+            return "v\(version)"
+        }
+        return "Version Unknown"
+    }
+
+    
+    var body: some View {
+        Form {
+            Section(header: Text("Appearance")) {
+                Toggle("Dark Mode", isOn: $viewModel.isDarkModeEnabled)
+            }
+            
+            Section(header: Text("Notifications")) {
+                Toggle("Enable Daily Reminder", isOn: $viewModel.isReminderEnabled)
+                if viewModel.isReminderEnabled {
+                    DatePicker("Reminder Time", selection: $viewModel.reminderTime, displayedComponents: .hourAndMinute)
+                }
+            }
+            
+            Section(header: Text("About")) {
+                HStack {
+                    Text("App Version")
+                    Spacer()
+                    Text(appVersion)
+                        .foregroundColor(.secondary)
+                }
+            }
+        }
+        .navigationTitle("Settings")
+    }
+}
+
+#Preview {
+    SettingsView(viewModel: SettingsViewModel())
+}
+
+8 Content View
+
+
+struct ContentView: View {
+    @StateObject var settingsViewModel = SettingsViewModel()
+    @StateObject var journalViewModel: JournalViewModel
+    var body: some View {
+        TabView {
+            JournalListView(viewModel: journalViewModel)
+                .tabItem {
+                    Label("Journal", systemImage: "book.fill")
+                }
+            
+            SettingsView(viewModel: SettingsViewModel())
+                .tabItem {
+                    Label("Settings", systemImage: "gear")
+                }
+        }
+        .preferredColorScheme(settingsViewModel.isDarkModeEnabled ? .dark : .light)
+            .accentColor(.blue)
+    }
+}
