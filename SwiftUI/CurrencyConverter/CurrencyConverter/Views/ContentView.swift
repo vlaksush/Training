@@ -42,7 +42,7 @@ struct ContentView: View {
                 }
                 
                 Button(action: {
-                    
+                    viewModel.swapCurrencies()
                 }) {
                     HStack {
                         Image(systemName: "arrow.left.arrow.right")
