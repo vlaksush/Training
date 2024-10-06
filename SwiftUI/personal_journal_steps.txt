@@ -286,3 +286,61 @@ struct ContentView: View {
             .accentColor(.blue)
     }
 }
+
+
+****************** Core Data Relationship - 7th October 2024 **************
+
+Step 1 - Update JournalViewModel, add the below function
+
+private func getOrCreateTag(name: String) -> Tag {
+    let request: NSFetchRequest<Tag> = Tag.fetchRequest()
+    request.predicate = NSPredicate(format: "name == %@", name)
+    
+    do {
+        let results = try viewContext.fetch(request)
+        if let existingTag = results.first {
+            return existingTag
+        }
+    } catch {
+        print("Error fetching tag: \(error)")
+    }
+    
+    let newTag = Tag(context: viewContext)
+    newTag.name = name
+    return newTag
+}
+
+
+Step 2 - Update JournalViewModel addEntry 
+
+for tagName in tagNames {
+    let tag = getOrCreateTag(name: tagName)
+    newEntry.addToTags(tag)
+}
+
+Step 3 - Update JournalViewModel updateEntry
+
+        // Remove all existing tags
+          if let existingTags = entry.tags as? Set<Tag> {
+              entry.removeFromTags(existingTags as NSSet)
+          }
+
+for tagName in tagNames {
+    let tag = getOrCreateTag(name: tagName)
+    entry.addToTags(tag)
+}
+
+Step 4 - Update JournalViewModel - add fetchTags
+
+    func fetchTags() {
+        let request: NSFetchRequest<Tag> = Tag.fetchRequest()
+        request.sortDescriptors = [NSSortDescriptor(keyPath: \Tag.name, ascending: true)]
+        
+        do {
+            tags = try viewContext.fetch(request)
+        } catch {
+            print("Error fetching tags: \(error)")
+        }
+    }
+     
+
