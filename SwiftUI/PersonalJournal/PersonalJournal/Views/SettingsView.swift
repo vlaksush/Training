@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct SettingsView: View {
-    
     @StateObject var viewModel: SettingsViewModel
     
     var appVersion: String {

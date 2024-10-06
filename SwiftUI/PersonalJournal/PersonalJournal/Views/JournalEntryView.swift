@@ -11,10 +11,12 @@ struct JournalEntryView: View {
     @Environment(\.dismiss) private var dismiss
     @StateObject var viewModel: JournalViewModel
     @StateObject var entry: JournalEntry
-
+    
     @State private var title: String
     @State private var content: String
     @State private var date: Date
+    @State private var tagInput: String = ""
+    @State private var selectedTags: [String] = []
     
     init(entry: JournalEntry, viewModel: JournalViewModel) {
         self.title = entry.title ?? ""
@@ -22,6 +24,7 @@ struct JournalEntryView: View {
         self.date = entry.date ?? Date()
         _entry = StateObject(wrappedValue: entry)
         _viewModel = StateObject(wrappedValue: viewModel)
+        // _selectedTags = State(initialValue: (entry.tags as? Set<Tag>)?.compactMap { $0.name } ?? [])
     }
     
     var body: some View {
@@ -39,21 +42,39 @@ struct JournalEntryView: View {
                     TextEditor(text: $content)
                         .frame(minHeight: 200)
                 }
-            }
-        }
-        .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
-                Button("Save") {
-                    viewModel.updateEntry(entry, title: title, content: content, date: date)
-                    dismiss()
+                Section(header: Text("Tags")) {
+                    TextField("Add tags (comma-separated)", text: $tagInput)
+                    
+                    ForEach(selectedTags, id: \.self) { tag in
+                        Text(tag)
+                    }
+                    .onDelete(perform: deleteTags)
                 }
             }
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button("Save") {
+                        viewModel.updateEntry(entry, title: title, content: content, date: date)
+                        dismiss()
+                    }
+                }
+            }
+            .navigationTitle("Journal Entry")
+            .padding()
         }
-        .navigationTitle("Journal Entry")
-        .padding()
+    }
+    
+    private func addTags() {
+        let newTags = tagInput.split(separator: ",").map { $0.trimmingCharacters(in: .whitespaces) }
+        selectedTags.append(contentsOf: newTags)
+        tagInput = ""
+    }
+    
+    private func deleteTags(at offsets: IndexSet) {
+        selectedTags.remove(atOffsets: offsets)
     }
 }
 
-//#Preview {
-//    JournalEntryView(entry: PersistenceController.testEntry)
-//}
+#Preview {
+    JournalEntryView(entry: PersistenceController.previewEntry, viewModel: JournalViewModel(viewContext: PersistenceController.preview.container.viewContext))
+}

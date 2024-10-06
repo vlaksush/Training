@@ -28,7 +28,7 @@ struct PersistenceController {
         return result
     }()
     
-    static var testEntry: JournalEntry = {
+    static var previewEntry: JournalEntry = {
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext
         let journalEntry = JournalEntry(context: viewContext)

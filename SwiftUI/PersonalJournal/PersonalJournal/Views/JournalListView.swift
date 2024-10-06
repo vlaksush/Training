@@ -17,11 +17,13 @@ struct JournalListView: View {
             List(viewModel.entries) { entry in
                 NavigationLink(destination:JournalEntryView(entry: entry,
                                                             viewModel: viewModel)) {
-                    Text(entry.title ?? "")
-                        .font(.headline)
-                    Text(entry.date ?? Date(), style: .date)
-                        .font(.subheadline)
-                        .foregroundColor(.secondary)
+                    VStack(alignment:.leading) {
+                        Text(entry.title ?? "")
+                            .font(.headline)
+                        Text(entry.date ?? Date(), style: .date)
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                    }
                 }
                                                             .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                                                                 Button(role: .destructive) {
@@ -49,3 +51,6 @@ struct JournalListView: View {
     }
 }
 
+#Preview {
+    JournalListView(viewModel: JournalViewModel(viewContext: PersistenceController.preview.container.viewContext))
+}
