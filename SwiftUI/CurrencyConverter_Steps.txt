@@ -79,3 +79,66 @@ let currencies = [
                         }
                     }
 
+
+**********************7th October 2024************
+
+Step 1 - Update ExchangeRateService 
+
+let SERVICE_URL = "https://open.er-api.com/v6/latest/USD"
+
+// Predefined list of currencies we want to support
+let supportedCurrencies = [
+    "USD": "US Dollar",
+    "EUR": "Euro",
+    "GBP": "British Pound",
+    "JPY": "Japanese Yen"
+]
+
+Step 2 - Add Struct for JSON Response handling 
+
+struct ExchangeRatesResponse: Codable {
+    let rates: [String: Double]
+}
+
+
+Step 3 - Add fetch Rates
+
+func fetchRates() async throws -> [Currency] {
+    let session = URLSession.shared
+    
+    guard let url = URL(string: SERVICE_URL) else {
+        throw URLError(.badURL)
+    }
+    
+    let request = URLRequest(url:url)
+    
+    let (data, _) = try await session.data(for: request)
+    
+    return try parseJSON(data: data)
+}
+
+Step 4 - Add Parse JSON
+
+private func parseJSON(data: Data) throws -> [Currency] {
+    let decoder = JSONDecoder()
+    let result = try decoder.decode(ExchangeRatesResponse.self, from: data)
+    
+    return supportedCurrencies.compactMap { (symbol, name) in
+        guard let rate = result.rates[symbol] else { return nil }
+        return Currency(name: name, symbol: symbol, conversionRate: rate)
+    }
+}
+
+Step 5 - Update CurrencyViewModel with fetchCurrencies
+
+func fetchCurrencies() async {
+    do {
+        currencies = try await ExchangeRateService.shared.fetchRates()
+        selectedFromCurrency = currencies.first { $0.symbol == selectedFromCurrency.symbol } ?? currencies[0]
+        selectedToCurrency = currencies.first { $0.symbol == selectedToCurrency.symbol } ?? currencies[1]
+    } catch {
+        print("Error fetching rates: \(error.localizedDescription)")
+    }
+}
+
+
