@@ -9,7 +9,6 @@ import Foundation
 
 struct Photo: Identifiable, Codable {
     let id: Int
-    let pageURL: String
     let previewURL: String
     let largeImageURL: String
     let user: String

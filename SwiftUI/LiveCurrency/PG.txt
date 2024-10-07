@@ -1,0 +1,157 @@
+Step 1: Install Cocopods
+
+
+platform :ios, '15.0'
+
+target 'PhotoGallery' do
+  use_frameworks!
+  pod 'Alamofire'
+end
+
+
+
+Step 2: Register for Pixarbay API and read the search API documentation 
+
+Step 3: Update the Photo struct and a new structure PixabayResponse
+
+struct Photo: Identifiable, Codable {
+    let id: Int
+    let previewURL: String
+    let largeImageURL: String
+    let user: String
+    let tags: String
+}
+
+struct PixabayResponse: Codable {
+    let total: Int
+    let totalHits: Int
+    let hits: [Photo]
+}
+
+
+Step 4: Add a new class, ExchangeRateService then add searchPhotos function.
+
+  func searchPhotos(query: String, completion: @escaping (Result<[Photo], Error>) -> Void) {
+
+  	     let parameters: [String: Any] = [
+            "key": API_KEY,
+            "q": query,
+            "image_type": "photo",
+            "per_page": 200
+        ]
+        
+        AF.request(BASE_URL, parameters: parameters).responseDecodable(of: PixabayResponse.self) { response in
+            switch response.result {
+            case .success(let pixabayResponse):
+                completion(.success(pixabayResponse.hits))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }  
+  }
+
+
+Step 5: Add State variables in PhotoListView
+
+    // variables
+    @State private var photos = [Photo]()
+    @State private var searchText = "famous quotes"
+
+// Step 6: create a new function 'loadPhotos' in PhotoListView and call the searchPhotos from PixabayService
+          
+    func loadPhotos() {
+        PixabayService.shared.searchPhotos(query: searchText) { result in
+            switch result {
+            case .success(let fetchedPhotos):
+                DispatchQueue.main.async {
+                    self.photos = fetchedPhotos
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+
+Step 7: Add the search button functionality
+
+            HStack {
+                    TextField("Search photos", text: $searchText)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                    Button (action: {
+                        loadPhotos()
+                    }) {
+                        Image(systemName: "magnifyingglass")
+                    }
+
+
+Step 8: Update PhotoListView to use AsyncImage 
+
+                                   AsyncImage(url: URL(string: photo.previewURL))
+                                   .frame(width: 100,height: 100)
+                                   .aspectRatio(contentMode: .fit)
+                                   .clipShape(RoundedRectangle(cornerRadius: 10.0))
+
+Step 10: Update ZoomablePhotView to use AsyncImage 
+
+                                 AsyncImage(url: URL(string: imageName)) { phase in
+            switch phase {
+            case .success(let image):
+                image
+                    .resizable()
+                    .scaledToFit()
+                    .scaleEffect(scale)
+                    .gesture(
+                        MagnificationGesture().onChanged({ change in
+                            scale = change
+                        })
+                    )
+                    .onTapGesture(count: 2) {
+                        if scale > 1.0 {
+                            scale = 1.0
+                        } else {
+                            scale = 2.0
+                        }
+                    }
+            case .empty:
+                ProgressView()
+            case .failure:
+                Image(systemName: "photo")
+                    .resizable()
+                    .scaledToFit()
+            @unknown default:
+                EmptyView()
+            }
+        }
+
+
+Step 9: Update Pods with pod 'SDWebImageSwiftUI' 
+
+
+Step 10: Change the AsyncImage in PhotoListView to use WebImage from SDWebImageSwiftUi framework
+
+ WebImage(url:URL(string: photo.previewURL))
+                                    .resizable()
+                                    .indicator(.activity)
+                                    .scaledToFill()
+                                    .frame(width: 100, height: 100)
+                                    .clipShape(RoundedRectangle(cornerRadius: 10))
+
+Step 11: Change the AsyncImage in ZoomablePhotoView to use WebImage
+
+WebImage(url:URL(string: imageName))
+            .resizable()
+            .indicator(.activity)
+            .aspectRatio(contentMode: .fit)
+            .scaleEffect(scale)
+            .gesture(
+                MagnificationGesture().onChanged({ change in
+                    scale = change
+                })
+            )
+            .onTapGesture(count: 2) {
+                if scale > 1.0 {
+                    scale = 1.0
+                } else {
+                    scale = 2.0
+                }
+            }
