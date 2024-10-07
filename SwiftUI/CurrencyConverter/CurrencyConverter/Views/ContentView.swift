@@ -55,6 +55,9 @@ struct ContentView: View {
             }
         }
         .padding()
+        .onAppear {
+            viewModel.loadCurrencies()
+        }
     }
 }
 

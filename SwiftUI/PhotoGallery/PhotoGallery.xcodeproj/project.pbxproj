@@ -12,15 +12,21 @@
 		488CD6CF2CAE5ADE00A19529 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 488CD6CE2CAE5ADE00A19529 /* Assets.xcassets */; };
 		488CD6D22CAE5ADE00A19529 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 488CD6D12CAE5ADE00A19529 /* Preview Assets.xcassets */; };
 		488CD6D92CAE5E7400A19529 /* PhotoDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488CD6D82CAE5E7400A19529 /* PhotoDetailView.swift */; };
+		48F623572CB3B53900407A22 /* PixabayService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F623562CB3B53900407A22 /* PixabayService.swift */; };
+		575699D434DF216240222C0A /* Pods_PhotoGallery.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2278C339E7067E6BC682FDAC /* Pods_PhotoGallery.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2278C339E7067E6BC682FDAC /* Pods_PhotoGallery.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PhotoGallery.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		488CD6C72CAE5ADD00A19529 /* PhotoGallery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoGallery.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		488CD6CA2CAE5ADD00A19529 /* PhotoGalleryApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoGalleryApp.swift; sourceTree = "<group>"; };
 		488CD6CC2CAE5ADD00A19529 /* PhotoListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoListView.swift; sourceTree = "<group>"; };
 		488CD6CE2CAE5ADE00A19529 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		488CD6D12CAE5ADE00A19529 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		488CD6D82CAE5E7400A19529 /* PhotoDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailView.swift; sourceTree = "<group>"; };
+		48F623562CB3B53900407A22 /* PixabayService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixabayService.swift; sourceTree = "<group>"; };
+		9395FF6EF6DC63A27327AE7C /* Pods-PhotoGallery.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhotoGallery.debug.xcconfig"; path = "Target Support Files/Pods-PhotoGallery/Pods-PhotoGallery.debug.xcconfig"; sourceTree = "<group>"; };
+		97737382801B2C08FECDB73C /* Pods-PhotoGallery.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhotoGallery.release.xcconfig"; path = "Target Support Files/Pods-PhotoGallery/Pods-PhotoGallery.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -28,17 +34,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				575699D434DF216240222C0A /* Pods_PhotoGallery.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		06BD697C800A8123E48D993A /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				9395FF6EF6DC63A27327AE7C /* Pods-PhotoGallery.debug.xcconfig */,
+				97737382801B2C08FECDB73C /* Pods-PhotoGallery.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		488CD6BE2CAE5ADD00A19529 = {
 			isa = PBXGroup;
 			children = (
 				488CD6C92CAE5ADD00A19529 /* PhotoGallery */,
 				488CD6C82CAE5ADD00A19529 /* Products */,
+				06BD697C800A8123E48D993A /* Pods */,
+				8872921557EF0CF6E556DFC6 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -58,6 +76,7 @@
 				488CD6CE2CAE5ADE00A19529 /* Assets.xcassets */,
 				488CD6D02CAE5ADE00A19529 /* Preview Content */,
 				488CD6D82CAE5E7400A19529 /* PhotoDetailView.swift */,
+				48F623562CB3B53900407A22 /* PixabayService.swift */,
 			);
 			path = PhotoGallery;
 			sourceTree = "<group>";
@@ -70,6 +89,14 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		8872921557EF0CF6E556DFC6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2278C339E7067E6BC682FDAC /* Pods_PhotoGallery.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -77,9 +104,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 488CD6D52CAE5ADE00A19529 /* Build configuration list for PBXNativeTarget "PhotoGallery" */;
 			buildPhases = (
+				998B2D3632DC0F2E0619E64B /* [CP] Check Pods Manifest.lock */,
 				488CD6C32CAE5ADD00A19529 /* Sources */,
 				488CD6C42CAE5ADD00A19529 /* Frameworks */,
 				488CD6C52CAE5ADD00A19529 /* Resources */,
+				FFFB350BE4D774F1770802CB /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -135,6 +164,48 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		998B2D3632DC0F2E0619E64B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-PhotoGallery-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FFFB350BE4D774F1770802CB /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PhotoGallery/Pods-PhotoGallery-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PhotoGallery/Pods-PhotoGallery-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PhotoGallery/Pods-PhotoGallery-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		488CD6C32CAE5ADD00A19529 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -142,6 +213,7 @@
 			files = (
 				488CD6CD2CAE5ADD00A19529 /* PhotoListView.swift in Sources */,
 				488CD6CB2CAE5ADD00A19529 /* PhotoGalleryApp.swift in Sources */,
+				48F623572CB3B53900407A22 /* PixabayService.swift in Sources */,
 				488CD6D92CAE5E7400A19529 /* PhotoDetailView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -270,6 +342,7 @@
 		};
 		488CD6D62CAE5ADE00A19529 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9395FF6EF6DC63A27327AE7C /* Pods-PhotoGallery.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -277,6 +350,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"PhotoGallery/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -298,6 +372,7 @@
 		};
 		488CD6D72CAE5ADE00A19529 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 97737382801B2C08FECDB73C /* Pods-PhotoGallery.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -305,6 +380,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"PhotoGallery/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

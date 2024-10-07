@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
 
 struct PhotoDetailView: View {
     
@@ -14,7 +15,7 @@ struct PhotoDetailView: View {
     
     var body: some View {
         VStack {
-            ZoomablePhotoView(imageName: photo.name, scale: $scale)
+            ZoomablePhotoView(imageName: photo.largeImageURL, scale: $scale)
         }
         .navigationBarItems(trailing: Button(action: {
             scale = 1.0
@@ -24,9 +25,9 @@ struct PhotoDetailView: View {
     }
 }
 
-#Preview {
-    PhotoDetailView(photo: Photo(name: "photo4"))
-}
+//#Preview {
+//    PhotoDetailView(photo: Photo(name: "photo4"))
+//}
 
 struct ZoomablePhotoView: View {
     
@@ -34,21 +35,22 @@ struct ZoomablePhotoView: View {
     @Binding var scale: CGFloat
     
     var body: some View {
-        Image(imageName)
-            .resizable()
-            .aspectRatio(contentMode: .fit)
-            .scaleEffect(scale)
-            .gesture(
-                MagnificationGesture().onChanged({ change in
-                    scale = change
-                })
-            )
-            .onTapGesture(count: 2) {
-                if scale > 1.0 {
-                    scale = 1.0
-                } else {
-                    scale = 2.0
-                }
-            }
+        WebImage(url:URL(string: imageName))
+                    .resizable()
+                    .indicator(.activity)
+                    .aspectRatio(contentMode: .fit)
+                    .scaleEffect(scale)
+                    .gesture(
+                        MagnificationGesture().onChanged({ change in
+                            scale = change
+                        })
+                    )
+                    .onTapGesture(count: 2) {
+                        if scale > 1.0 {
+                            scale = 1.0
+                        } else {
+                            scale = 2.0
+                        }
+                    }
     }
 }

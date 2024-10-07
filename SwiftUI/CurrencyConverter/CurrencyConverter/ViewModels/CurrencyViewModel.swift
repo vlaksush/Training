@@ -14,6 +14,7 @@ struct Currency:Identifiable, Hashable {
     let conversionRate: Double
 }
 
+@MainActor
 class CurrencyViewModel: ObservableObject {
     @Published var currencies:[Currency]
     @Published var selectedFromCurrency: Currency
@@ -42,4 +43,19 @@ class CurrencyViewModel: ObservableObject {
         selectedToCurrency = temp
     }
     
+    func loadCurrencies() {
+        Task {
+            await fetchCurrencies()
+        }
+    }
+    
+    func fetchCurrencies() async {
+        do {
+            currencies = try await ExchangeRateService.shared.fetchRates()
+            selectedFromCurrency = currencies.first { $0.symbol == selectedFromCurrency.symbol } ?? currencies[0]
+            selectedToCurrency = currencies.first { $0.symbol == selectedToCurrency.symbol } ?? currencies[1]
+        } catch {
+            print("Error fetching rates: \(error.localizedDescription)")
+        }
+    }
 }
