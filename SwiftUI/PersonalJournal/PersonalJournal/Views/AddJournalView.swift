@@ -38,7 +38,8 @@ struct AddJournalView: View {
             .toolbar{
                 ToolbarItem(placement:.bottomBar) {
                     Button("Save") {
-                        viewModel.addEntry(title: journalTitle, content: content)
+                        addTags()
+                        viewModel.addEntry(title: journalTitle, content: content, tagNames: selectedTags)
                         dismiss()
                     }
                 }

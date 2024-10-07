@@ -24,7 +24,7 @@ struct JournalEntryView: View {
         self.date = entry.date ?? Date()
         _entry = StateObject(wrappedValue: entry)
         _viewModel = StateObject(wrappedValue: viewModel)
-        // _selectedTags = State(initialValue: (entry.tags as? Set<Tag>)?.compactMap { $0.name } ?? [])
+         _selectedTags = State(initialValue: (entry.tags as? Set<Tag>)?.compactMap { $0.name } ?? [])
     }
     
     var body: some View {
@@ -54,7 +54,8 @@ struct JournalEntryView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("Save") {
-                        viewModel.updateEntry(entry, title: title, content: content, date: date)
+                        addTags()
+                        viewModel.updateEntry(entry, title: title, content: content, date: date, tagNames: selectedTags)
                         dismiss()
                     }
                 }
