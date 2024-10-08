@@ -1,0 +1,183 @@
+// Testing Instructions
+
+// Step 1
+
+import CoreData
+@testable import PersonalJournal
+
+// Step 2
+
+var persistenceController: PersistenceController!
+var journalViewModel: JournalViewModel!
+
+
+// Step 3
+
+override func setUpWithError() throws {
+    persistenceController = PersistenceController.createTestController()
+    journalViewModel = JournalViewModel(viewContext: persistenceController.container.viewContext)
+}
+
+// Step 4
+
+override func tearDownWithError() throws {
+    persistenceController = nil
+    journalViewModel = nil
+}
+    
+// Step 5
+
+  func testEntry() throws {
+        // Given
+        let initialCount = journalViewModel.entries.count
+        let title = "Test Entry"
+        let content = "This is a test entry"
+        let tags = ["test", "unit"]
+        
+        // When
+        journalViewModel.addEntry(title: title, content: content, tagNames: tags)
+        
+        // Then
+        XCTAssertEqual(journalViewModel.entries.count, initialCount + 1)
+        let newEntry = journalViewModel.entries.first
+        XCTAssertEqual(newEntry?.title, title)
+        XCTAssertEqual(newEntry?.content, content)
+        XCTAssertEqual(newEntry?.tags?.count, 2)
+    }
+    
+
+    // Step 6 
+
+      func testUpdateEntry() throws {
+        // Given
+        journalViewModel.addEntry(title: "Original", content: "Original content", tagNames: ["original"])
+        let entry = journalViewModel.entries.first!
+        let newTitle = "Updated"
+        let newContent = "Updated content"
+        let newTags = ["updated", "test"]
+        
+        // When
+        journalViewModel.updateEntry(entry, title: newTitle, content: newContent, date: Date(), tagNames: newTags)
+        
+        // Then
+        XCTAssertEqual(entry.title, newTitle)
+        XCTAssertEqual(entry.content, newContent)
+        XCTAssertEqual(entry.tags?.count, 2)
+    }
+
+    // Step 7
+
+
+    func testDeleteEntry() throws {
+        // Given
+        journalViewModel.addEntry(title: "To Delete", content: "This will be deleted", tagNames: [])
+        let initialCount = journalViewModel.entries.count
+        if let entryToDelete = journalViewModel.entries.first {
+            
+            // When
+            journalViewModel.deleteEntry(entryToDelete)
+            
+            // Then
+            XCTAssertEqual(journalViewModel.entries.count, initialCount - 1)
+            XCTAssertFalse(journalViewModel.entries.contains(entryToDelete))
+        }
+    }
+
+    // step 9
+
+    import XCTest
+import CoreData
+
+@testable import PersonalJournal
+
+final class SettingsViewModelTests: XCTestCase {
+    
+    var settingsViewModel: SettingsViewModel!
+    
+    override func setUpWithError() throws {
+        settingsViewModel = SettingsViewModel()
+    }
+    
+    override func tearDownWithError() throws {
+        settingsViewModel = nil
+    }
+    
+    func testToggleDarkMode() {
+        // Given
+        let initialState = settingsViewModel.isDarkModeEnabled
+        
+        // When
+        settingsViewModel.isDarkModeEnabled.toggle()
+        
+        // Then
+        XCTAssertEqual(settingsViewModel.isDarkModeEnabled, !initialState)
+        XCTAssertEqual(UserDefaults.standard.bool(forKey: "isDarkModeEnabled"), !initialState)
+    }
+    
+    func testChangeReminderTime() {
+        // Given
+        let newTime = Date().addingTimeInterval(3600) // 1 hour from now
+        
+        // When
+        settingsViewModel.reminderTime = newTime
+        
+        // Then
+        XCTAssertEqual(settingsViewModel.reminderTime, newTime)
+        XCTAssertEqual(UserDefaults.standard.object(forKey: "reminderTime") as? Date, newTime)
+    }
+}
+
+***** UI Test *****
+
+// Step 1
+
+override func setUpWithError() throws {
+    continueAfterFailure = false
+}
+
+// Step 2
+
+  func testAddNewJournalEntry() throws {
+        let app = XCUIApplication()
+        app.launch()
+        
+        // Tap the add button
+        app.navigationBars["Personal Journal"].buttons["Add"].tap()
+        
+        // Fill in the journal entry details
+        let titleTextField = app.textFields["Title"]
+        titleTextField.tap()
+        titleTextField.typeText("UI Test Entry")
+        
+        let contentTextView = app.textViews.element
+        contentTextView.tap()
+        contentTextView.typeText("This is a test entry created by UI testing")
+        
+        // Add a tag
+        let tagTextField = app.textFields["Add tags (comma-separated)"]
+        tagTextField.tap()
+        tagTextField.typeText("uitest")
+        app.buttons["Save"].tap()
+        
+        // Verify the new entry appears in the list
+        XCTAssertTrue(app.staticTexts["UI Test Entry"].exists)
+    }
+
+
+    // Step 3
+    func testNavigateToSettings() throws {
+        let app = XCUIApplication()
+        app.launch()
+        
+        // Navigate to Settings
+        app.tabBars.buttons["Settings"].tap()
+        
+        // Verify Settings view is displayed
+        XCTAssertTrue(app.navigationBars["Settings"].exists)
+        
+        // Toggle Dark Mode
+        app.switches["Dark Mode"].tap()
+        
+        // Verify the switch state changed
+        XCTAssertNotEqual(app.switches["Dark Mode"].value as? String, "0")
+    }

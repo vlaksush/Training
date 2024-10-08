@@ -1,0 +1,40 @@
+pod spec create RSPulse
+
+Edit the RSPulse.podspec file:
+Pod::Spec.new do |spec|
+  spec.name         = "RSPulse"
+  spec.version      = "0.1.0"
+  spec.summary      = "A short description of RSPulse."
+  spec.description  = "A longer description of RSPulse."
+  spec.homepage     = "https://github.com/rshankras/RSPulse"
+  spec.license      = { :type => "MIT", :file => "LICENSE" }
+  spec.author       = { "Your Name" => "your@email.com" }
+  spec.source       = { :git => "https://github.com/username/RSPulse.git", 
+                        :tag => "#{spec.version}" }
+  spec.platform     = :ios, "13.0"
+  spec.swift_version = "5.0"
+  spec.source_files  = "**/*.swift"
+  spec.exclude_files = "RSPulseTests/**/*"
+end
+
+pod spec lint RSPulse.podspec --allow-warnings
+
+git add .
+git commit -m "Release 0.1.0"
+git tag 0.1.0
+git push origin master —tags 
+
+pod trunk register ravishankar@outlook.in 'Ravi Shankar'
+
+pod trunk push RSPulse.podspec --allow-warnings
+
+#Update version
+
+git add .
+git commit -m "Update to version X.X.X"
+git tag X.X.X
+git push origin master --tags
+
+Validate and push the new version:
+pod spec lint RSPulse.podspec
+pod trunk push RSPulse.podspec
