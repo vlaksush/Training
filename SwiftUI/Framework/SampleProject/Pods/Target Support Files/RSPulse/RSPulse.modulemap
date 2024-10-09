@@ -1,0 +1,6 @@
+framework module RSPulse {
+  umbrella header "RSPulse-umbrella.h"
+
+  export *
+  module * { export * }
+}
