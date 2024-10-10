@@ -58,7 +58,7 @@ let containerView = UIView(frame: CGRect(x: 0, y: 0, width: 300, height: 500))
 
 let animationView = UIView(frame: CGRect(x: 50, y: 50, width: 200, height: 200))
 animationView.backgroundColor = .red
-containerView.addSubview(animationView)
+//containerView.addSubview(animationView)
 
 func animateColorChange() {
     UIView.animate(withDuration: 2, animations: {
