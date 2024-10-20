@@ -60,12 +60,12 @@
 			children = (
 				4820F5D22CA6B12200AF0388 /* AppDelegate.swift */,
 				4820F5D42CA6B12200AF0388 /* SceneDelegate.swift */,
+				4820F5E62CA6B81400AF0388 /* SportsViewController.swift */,
 				4820F5D62CA6B12200AF0388 /* WorldNewsViewController.swift */,
 				4820F5D82CA6B12200AF0388 /* Main.storyboard */,
 				4820F5DB2CA6B12400AF0388 /* Assets.xcassets */,
 				4820F5DD2CA6B12400AF0388 /* LaunchScreen.storyboard */,
 				4820F5E02CA6B12400AF0388 /* Info.plist */,
-				4820F5E62CA6B81400AF0388 /* SportsViewController.swift */,
 			);
 			path = NewsReader;
 			sourceTree = "<group>";

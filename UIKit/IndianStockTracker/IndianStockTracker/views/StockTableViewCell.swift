@@ -27,6 +27,6 @@ class StockTableViewCell: UITableViewCell {
     func configure(with stock: Stock) {
         symbolLabel.text = stock.symbol
         nameLabel.text = stock.name
-        priceLabel.text = String(format: "$%.2f", stock.price)
+        priceLabel.text = String(format: "₹%.2f", stock.price)
     }
 }

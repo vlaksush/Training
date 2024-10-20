@@ -7,37 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		48A2F3F42CAAD46F00766A66 /* appstore1024.png in Resources */ = {isa = PBXBuildFile; fileRef = 48A2F3D92CAAD46F00766A66 /* appstore1024.png */; };
-		48A2F3F52CAAD46F00766A66 /* Contents.json in Resources */ = {isa = PBXBuildFile; fileRef = 48A2F3DA2CAAD46F00766A66 /* Contents.json */; };
-		48A2F3F62CAAD46F00766A66 /* ipad76.png in Resources */ = {isa = PBXBuildFile; fileRef = 48A2F3DB2CAAD46F00766A66 /* ipad76.png */; };
-		48A2F3F72CAAD46F00766A66 /* ipad152.png in Resources */ = {isa = PBXBuildFile; fileRef = 48A2F3DC2CAAD46F00766A66 /* ipad152.png */; };
-		48A2F3F82CAAD46F00766A66 /* ipadNotification20.png in Resources */ = {isa = PBXBuildFile; fileRef = 48A2F3DD2CAAD46F00766A66 /* ipadNotification20.png */; };
-		48A2F3F92CAAD46F00766A66 /* ipadNotification40.png in Resources */ = {isa = PBXBuildFile; fileRef = 48A2F3DE2CAAD46F00766A66 /* ipadNotification40.png */; };
-		48A2F3FA2CAAD46F00766A66 /* ipadPro167.png in Resources */ = {isa = PBXBuildFile; fileRef = 48A2F3DF2CAAD46F00766A66 /* ipadPro167.png */; };
-		48A2F3FB2CAAD46F00766A66 /* ipadSettings29.png in Resources */ = {isa = PBXBuildFile; fileRef = 48A2F3E02CAAD46F00766A66 /* ipadSettings29.png */; };
-		48A2F3FC2CAAD46F00766A66 /* ipadSettings58.png in Resources */ = {isa = PBXBuildFile; fileRef = 48A2F3E12CAAD46F00766A66 /* ipadSettings58.png */; };
-		48A2F3FD2CAAD46F00766A66 /* ipadSpotlight40.png in Resources */ = {isa = PBXBuildFile; fileRef = 48A2F3E22CAAD46F00766A66 /* ipadSpotlight40.png */; };
-		48A2F3FE2CAAD46F00766A66 /* ipadSpotlight80.png in Resources */ = {isa = PBXBuildFile; fileRef = 48A2F3E32CAAD46F00766A66 /* ipadSpotlight80.png */; };
-		48A2F3FF2CAAD46F00766A66 /* iphone120.png in Resources */ = {isa = PBXBuildFile; fileRef = 48A2F3E42CAAD46F00766A66 /* iphone120.png */; };
-		48A2F4002CAAD46F00766A66 /* iphone180.png in Resources */ = {isa = PBXBuildFile; fileRef = 48A2F3E52CAAD46F00766A66 /* iphone180.png */; };
-		48A2F4012CAAD46F00766A66 /* mac16.png in Resources */ = {isa = PBXBuildFile; fileRef = 48A2F3E62CAAD46F00766A66 /* mac16.png */; };
-		48A2F4022CAAD46F00766A66 /* mac32.png in Resources */ = {isa = PBXBuildFile; fileRef = 48A2F3E72CAAD46F00766A66 /* mac32.png */; };
-		48A2F4032CAAD46F00766A66 /* mac64.png in Resources */ = {isa = PBXBuildFile; fileRef = 48A2F3E82CAAD46F00766A66 /* mac64.png */; };
-		48A2F4042CAAD46F00766A66 /* mac128.png in Resources */ = {isa = PBXBuildFile; fileRef = 48A2F3E92CAAD46F00766A66 /* mac128.png */; };
-		48A2F4052CAAD46F00766A66 /* mac256.png in Resources */ = {isa = PBXBuildFile; fileRef = 48A2F3EA2CAAD46F00766A66 /* mac256.png */; };
-		48A2F4062CAAD46F00766A66 /* mac512.png in Resources */ = {isa = PBXBuildFile; fileRef = 48A2F3EB2CAAD46F00766A66 /* mac512.png */; };
-		48A2F4072CAAD46F00766A66 /* mac1024.png in Resources */ = {isa = PBXBuildFile; fileRef = 48A2F3EC2CAAD46F00766A66 /* mac1024.png */; };
-		48A2F4082CAAD46F00766A66 /* notification40.png in Resources */ = {isa = PBXBuildFile; fileRef = 48A2F3ED2CAAD46F00766A66 /* notification40.png */; };
-		48A2F4092CAAD46F00766A66 /* notification60.png in Resources */ = {isa = PBXBuildFile; fileRef = 48A2F3EE2CAAD46F00766A66 /* notification60.png */; };
-		48A2F40A2CAAD46F00766A66 /* settings58.png in Resources */ = {isa = PBXBuildFile; fileRef = 48A2F3EF2CAAD46F00766A66 /* settings58.png */; };
-		48A2F40B2CAAD46F00766A66 /* settings87.png in Resources */ = {isa = PBXBuildFile; fileRef = 48A2F3F02CAAD46F00766A66 /* settings87.png */; };
-		48A2F40C2CAAD46F00766A66 /* spotlight80.png in Resources */ = {isa = PBXBuildFile; fileRef = 48A2F3F12CAAD46F00766A66 /* spotlight80.png */; };
-		48A2F40D2CAAD46F00766A66 /* spotlight120.png in Resources */ = {isa = PBXBuildFile; fileRef = 48A2F3F22CAAD46F00766A66 /* spotlight120.png */; };
 		48DE066E2CAAA98400F37913 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DE066D2CAAA98400F37913 /* AppDelegate.swift */; };
 		48DE06702CAAA98400F37913 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DE066F2CAAA98400F37913 /* SceneDelegate.swift */; };
 		48DE06722CAAA98400F37913 /* MyAddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DE06712CAAA98400F37913 /* MyAddressViewController.swift */; };
 		48DE06752CAAA98400F37913 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 48DE06742CAAA98400F37913 /* Base */; };
-		48DE06772CAAA98500F37913 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 48DE06762CAAA98500F37913 /* Assets.xcassets */; };
 		48DE067A2CAAA98500F37913 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 48DE06792CAAA98500F37913 /* Base */; };
 		48DE06872CAAB0DB00F37913 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48DE06862CAAB0DB00F37913 /* CoreLocation.framework */; };
 /* End PBXBuildFile section */
@@ -224,35 +197,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				48A2F4072CAAD46F00766A66 /* mac1024.png in Resources */,
-				48A2F4022CAAD46F00766A66 /* mac32.png in Resources */,
-				48A2F4032CAAD46F00766A66 /* mac64.png in Resources */,
-				48A2F4062CAAD46F00766A66 /* mac512.png in Resources */,
-				48A2F40D2CAAD46F00766A66 /* spotlight120.png in Resources */,
-				48A2F3F82CAAD46F00766A66 /* ipadNotification20.png in Resources */,
-				48A2F3F52CAAD46F00766A66 /* Contents.json in Resources */,
-				48A2F3FF2CAAD46F00766A66 /* iphone120.png in Resources */,
-				48A2F3F92CAAD46F00766A66 /* ipadNotification40.png in Resources */,
-				48A2F3F72CAAD46F00766A66 /* ipad152.png in Resources */,
-				48A2F3F42CAAD46F00766A66 /* appstore1024.png in Resources */,
-				48A2F40B2CAAD46F00766A66 /* settings87.png in Resources */,
-				48A2F3F62CAAD46F00766A66 /* ipad76.png in Resources */,
-				48A2F4092CAAD46F00766A66 /* notification60.png in Resources */,
-				48DE06772CAAA98500F37913 /* Assets.xcassets in Resources */,
-				48A2F40A2CAAD46F00766A66 /* settings58.png in Resources */,
 				48DE067A2CAAA98500F37913 /* Base in Resources */,
-				48A2F4012CAAD46F00766A66 /* mac16.png in Resources */,
-				48A2F3FE2CAAD46F00766A66 /* ipadSpotlight80.png in Resources */,
-				48A2F3FA2CAAD46F00766A66 /* ipadPro167.png in Resources */,
-				48A2F4082CAAD46F00766A66 /* notification40.png in Resources */,
-				48A2F3FC2CAAD46F00766A66 /* ipadSettings58.png in Resources */,
-				48A2F4002CAAD46F00766A66 /* iphone180.png in Resources */,
 				48DE06752CAAA98400F37913 /* Base in Resources */,
-				48A2F4042CAAD46F00766A66 /* mac128.png in Resources */,
-				48A2F40C2CAAD46F00766A66 /* spotlight80.png in Resources */,
-				48A2F4052CAAD46F00766A66 /* mac256.png in Resources */,
-				48A2F3FB2CAAD46F00766A66 /* ipadSettings29.png in Resources */,
-				48A2F3FD2CAAD46F00766A66 /* ipadSpotlight40.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -343,7 +289,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -400,7 +346,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -425,6 +371,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -453,6 +400,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

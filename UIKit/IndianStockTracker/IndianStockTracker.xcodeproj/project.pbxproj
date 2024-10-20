@@ -64,11 +64,11 @@
 				48DE065B2CAA99C700F37913 /* controllers */,
 				48DE06472CAA959800F37913 /* AppDelegate.swift */,
 				48DE06492CAA959800F37913 /* SceneDelegate.swift */,
+				48DE065C2CAA99E100F37913 /* StockManager.swift */,
 				48DE064D2CAA959800F37913 /* Main.storyboard */,
 				48DE06502CAA959900F37913 /* Assets.xcassets */,
 				48DE06522CAA959900F37913 /* LaunchScreen.storyboard */,
 				48DE06552CAA959900F37913 /* Info.plist */,
-				48DE065C2CAA99E100F37913 /* StockManager.swift */,
 			);
 			path = IndianStockTracker;
 			sourceTree = "<group>";
