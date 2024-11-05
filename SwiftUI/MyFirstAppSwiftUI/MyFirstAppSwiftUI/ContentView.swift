@@ -8,26 +8,29 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var welcomeText = "Welcome to SwiftUI!"
+    @State private var welcomeText = "Hello, World!"
 
     var body: some View {
         VStack {
-            Text(welcomeText)
-                .font(.title)
-                .fontWeight(.bold)
-                .foregroundColor(Color.blue)
+            HStack {
+                Text(welcomeText)
+                    .font(.title)
+                    .fontWeight(.bold)
+                    .foregroundColor(Color.blue)
+                Image(systemName: "star.fill")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 50, height: 50)
+                    .foregroundColor(.yellow)
+            }
             Button("Press Me") {
-                welcomeText = "Button Pressed!"
+                welcomeText = "Welcome to SwiftUI!"
             }
             .padding()
             .background(Color.green)
             .foregroundColor(.white)
             .cornerRadius(10)
-            Image(systemName: "star.fill")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 100, height: 100)
-                .foregroundColor(.yellow)
+            .font(.title)
         }
     }
 }
