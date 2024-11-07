@@ -8,7 +8,6 @@ Adventure Highlights:
 3. Chennai Streetz: Type Inference, Explicit Types, Variadic Functions
 4. CodeCrastinate: Enums and optionals in Bangalore
 5. Bollywood Bits: Closures and Higher-order functions in Mumbai
-6. Cricket Coder: Final challenge
 
 Let's start with a greeting:
 */
