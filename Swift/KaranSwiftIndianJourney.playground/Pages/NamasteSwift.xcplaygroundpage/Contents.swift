@@ -148,51 +148,12 @@ print("\nEnjoy your trip to India, \(travelerName)!")
 Help Karan finalize his trip preparations with these challenges:
 
 1. Create a function that converts the budget from Rupees to Dollars (assume 1 USD = 83 INR)
-2. Add more items to the packing list using an array and a for loop
+2. Add more items to the packing list using an array and print those items using a for loop
 3. Create a tuple for emergency contacts and print it using string interpolation. You can have a tuple for name and phone.
-4. Write a function formatCurrency that takes paramters budgetPerDay (Int) and exchangeRate (Double) with default value for exhangeRate as 83, This converts the budget from Rupees to Dollars. Also adds currency symbol. For example, it should return "US$99.99".Hint - Use [NumberFomatter](https://developer.apple.com/documentation/foundation/numberformatter#)
+4. Write a function formatCurrency that takes paramters budgetPerDay (Int) and exchangeRate (Double) with default value for exhangeRate as 83, This converts the budget from Rupees to Dollars. Also adds currency symbol. For example, it should return "US$99.99". Hint - Use [NumberFomatter](https://developer.apple.com/documentation/foundation/numberformatter#)
 
 Write your solutions below:
 */
-
-// Write your solution here
-
-func currencyConverter() -> Int {
-    return budgetPerDay / 83
-}
-
-print("\nBudget/day in USD:")
-print(currencyConverter())
-
-
-var extraItems = ["Power Bank","Water Bottle"]
-print("\nExtra Packages:")
-
-print("\nAdditional items for your packing list:")
-for (index, item) in extraItems.enumerated() {
-    print("☐ \(index + 1). \(item)")
-}
-
-let emergencyContacts = (
-    familyContact:(name:"Mom", phone: "+1 343-353-3535"),
-    localContact:(name:"Hotel Reception", phone: "+91 94440950023"),
-    embassy:(name:"US Embassy", phone: "+91 9885600001")
-)
-
-print("\nEmergency Contacts")
-print("Family: \(emergencyContacts.familyContact.name) - \(emergencyContacts.familyContact.phone)")
-print("Hotel: \(emergencyContacts.localContact.name) - \(emergencyContacts.localContact.phone)")
-print("Embassy: \(emergencyContacts.embassy.name) - \(emergencyContacts.embassy.phone)")
-
-func formatCurrency(budgetPerDay: Int, exchangeRate: Double = 83) -> String {
-    let numberFormatter = NumberFormatter()
-    numberFormatter.currencyCode = "USD"
-    numberFormatter.numberStyle = .currency
-    let convertedAmount = Double(budgetPerDay) / exchangeRate
-    return numberFormatter.string(from: NSNumber(value: convertedAmount)) ?? "USD \(convertedAmount)"
-}
-
-print(formatCurrency(budgetPerDay: budgetPerDay, exchangeRate: 83))
 
 /*:
 Great job! You've helped Karan plan his trip to India while learning Swift basics.
