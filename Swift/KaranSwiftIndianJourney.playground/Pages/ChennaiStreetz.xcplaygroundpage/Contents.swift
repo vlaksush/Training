@@ -74,7 +74,7 @@ func reactToCustomer(mood: String) {
     case "unimpressed":
         print("Not feeling it? Let me show you our latest drops!")
     default:
-        print("How about a quick chai break while you decide?")
+        print("How about a quick tea break while you decide?")
     }
 }
 
@@ -120,7 +120,7 @@ print("Total damage: ₹\(totalBill)")
 
 Help Karan add some cool features to his Chennai Streetz app:
 
-1. Create a function that determines if a customer is eligible for a "Trendsetter" discount
+1. Create a function that determines if a customer is eligible for a "Trendsetter" discount. The eligibility based on score > 80 and purchase history amount > 5000
    Hint: Use a tuple to store customer information (name, style_score, purchase_history)
 
 2. Implement a function to calculate the final price of an item after applying GST (Goods and Services Tax).
@@ -141,79 +141,6 @@ Help Karan add some cool features to his Chennai Streetz app:
 
 // Write your solution here
 
-// 1. Trendsetter Discount Eligibility
-func isTrendsetterEligible(customer: (name: String, styleScore: Int, purchaseHistory: Int)) -> Bool {
-    let (_, styleScore, purchaseHistory) = customer
-    return styleScore > 80 && purchaseHistory > 5000
-}
-
-// Test the function
-let customer1 = (name: "Priya", styleScore: 85, purchaseHistory: 6000)
-let customer2 = (name: "Rahul", styleScore: 75, purchaseHistory: 4000)
-
-print("Is \(customer1.name) eligible for Trendsetter discount? \(isTrendsetterEligible(customer: customer1))")
-print("Is \(customer2.name) eligible for Trendsetter discount? \(isTrendsetterEligible(customer: customer2))")
-
-// 2. Calculate price with GST
-func priceWithGST(itemPrice: Double) -> Double {
-    return itemPrice * (1 + gst)
-}
-
-// Test the function
-let originalPrice = 1000.0
-let priceWithTax = priceWithGST(itemPrice: originalPrice)
-print("Original price: ₹\(originalPrice), Price with GST: ₹\(priceWithTax)")
-
-
-// 3. Clothing sizes array and categorization
-let sizes = ["XS", "S", "M", "L", "XL", "XXL"]
-
-
-
-
-for size in sizes {
-    print(size)
-}
-
-for size in sizes {
-    switch size {
-    case "XS", "S":
-        print("\(size) is categorized as Small")
-    case "M", "L":
-        print("\(size) is categorized as Medium")
-    case "XL", "XXL":
-        print("\(size) is categorized as Large")
-    default:
-        print("\(size) is an unknown size category")
-    }
-}
-
-
-// 4. Average price calculation
-func averagePrice(items: Double...) -> Double {
-    var total:Double = 0.0
-    for item in items {
-        total += item
-    }
-    return total / Double(items.count)
-}
-
-// Test the function
-let avgPrice = averagePrice(items: 1500, 2000, 1750, 1250)
-print("Average price of items: ₹\(avgPrice)")
-
-// 5. Loyalty points system
-func applyLoyaltyPoints(totalPurchase: inout Double) {
-    let points = Int(totalPurchase / 100)
-    let pointValue = Double(points)
-    print("You've earned \(points) loyalty points!")
-    totalPurchase += pointValue
-    print("New total including point value: ₹\(totalPurchase)")
-}
-
-// Test the function
-var purchaseTotal = 5500.0
-applyLoyaltyPoints(totalPurchase: &purchaseTotal)
 
 /*:
 Great job! You've helped Karan create a Gen Z-friendly shopping app while mastering some intermediate Swift concepts.
