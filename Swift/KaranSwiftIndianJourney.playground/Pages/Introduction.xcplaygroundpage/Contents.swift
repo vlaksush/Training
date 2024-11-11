@@ -28,6 +28,9 @@ Use the space below to write your code:
 
 // Write your code here
 
+var travelerName: String = "Ravi Shankar"
+let destination: String = "India"
+print("Hello, \(travelerName)! Welcome to \(destination)!")
 
 /*:
 Great job!

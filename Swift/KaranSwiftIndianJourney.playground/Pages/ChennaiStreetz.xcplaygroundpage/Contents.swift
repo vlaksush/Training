@@ -140,8 +140,6 @@ Help Karan add some cool features to his Chennai Streetz app:
 */
 
 // Write your solution here
-
-
 /*:
 Great job! You've helped Karan create a Gen Z-friendly shopping app while mastering some intermediate Swift concepts.
 

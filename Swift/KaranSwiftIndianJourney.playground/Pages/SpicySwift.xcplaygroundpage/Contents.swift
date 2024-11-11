@@ -125,7 +125,6 @@ Help Karan enhance his Great Indian Food Adventure game with these challenges:
 */
 
 // Write your solution here
-
 /*:
 Fantastic work! You've helped Karan create an exciting food adventure game while spicing up your Swift skills.
 

@@ -145,6 +145,46 @@ Help Karan enhance his Lazy Coder app with these challenges:
 
 // Write your solution here
 
+// CHALLENGE 1: Debug Code Function
+// First, define bug severity enum
+enum BugSeverity: String, CaseIterable {
+    case minor = "Just a small typo"
+    case moderate = "Unexpected behavior"
+    case severe = "Everything is on fire"
+    case catastrophic = "Delete the repository and change careers"
+}
+
+func debugCode() {
+    // Simulate finding a bug (optional to represent possibility of no bug)
+    let foundBug: BugSeverity? = BugSeverity.allCases.randomElement()
+    
+    // Use optional binding to handle the bug case
+    if let bug = foundBug {
+        // Switch on bug severity for different messages
+        switch bug {
+        case .minor:
+            print("🐛 Found a bug: \(bug.rawValue)")
+            print("Solution: Just add a semicolon somewhere")
+            
+        case .moderate:
+            print("🪲 Found a bug: \(bug.rawValue)")
+            print("Solution: Have you tried turning it off and on again?")
+            
+        case .severe:
+            print("🔥 Found a bug: \(bug.rawValue)")
+            print("Solution: Time to blame it on the intern")
+            
+        case .catastrophic:
+            print("💀 Found a bug: \(bug.rawValue)")
+            print("Solution: Update your LinkedIn profile")
+        }
+    } else {
+        print("✨ No bugs found! (This is probably a bug in our bug detector)")
+    }
+}
+
+// Test the functions
+
 /*:
 Excellent work! You've helped Karan create a humorous yet surprisingly insightful procrastination simulation app. Remember, sometimes the best way to overcome procrastination is to lean into it creatively!
 
