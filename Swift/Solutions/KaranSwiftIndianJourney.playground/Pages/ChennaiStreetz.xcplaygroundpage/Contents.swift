@@ -24,6 +24,7 @@ var quantity: Int = 1
 var isInfluencer: Bool = false
 var discount: Double = 0.0
 
+
 /*:
 ## Let Swift Figure It Out with Type Inference
 
