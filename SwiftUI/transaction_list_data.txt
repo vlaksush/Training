@@ -134,6 +134,17 @@ Section(header: Text("Transaction Details")) {
                     .pickerStyle(SegmentedPickerStyle())
                     DatePicker("Date", selection: $date, displayedComponents: .date)
                 }
+         Section() {
+                HStack {
+                    Button("Save") {
+                        saveTransaction()
+                    }
+                    Spacer()
+                    Button("Cancel") {
+                        dismiss()
+                    }
+                }
+            }
 
     // step 14
 
@@ -153,11 +164,38 @@ Section(header: Text("Transaction Details")) {
         dismiss()
     }
 
-
-
 // step 15
+    @State private var isShowingAddTransaction: Bool = false
+
+// step 16
      .navigationBarItems(trailing: Button(action: {
                     isShowingAddTransaction = true
                 }) {
                     Image(systemName: "plus")
                 })
+
+            .refreshable {
+                loadTransactions()
+            }
+            .sheet(isPresented: $isShowingAddTransaction) {
+                AddTransactionView(transactions: $transactions)
+            }
+
+// step 17
+
+    private func deleteItem(transaction: Transaction) {
+        if let index = transactions.firstIndex(of: transaction) {
+            transactions.remove(at: index)
+        }
+    }
+    
+
+// Add this modifier to this list view
+
+           .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                    Button(role: .destructive) {
+                        deleteItem(transaction: transaction)
+                    } label: {
+                        Label("Delete", systemImage: "trash")
+                    }
+                }

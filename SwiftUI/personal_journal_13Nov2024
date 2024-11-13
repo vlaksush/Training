@@ -1,0 +1,126 @@
+// Date :- 13 Nov 2024
+
+// Step 1: Add the following attributes to entity 'JournalEntry'
+
+title: String
+content: String
+date: Date
+
+// Step 2: Build the project 
+
+// Step 3: Clean up Persistence Controller & Content View and Resolve all the errors.
+
+// This is how your ContentView will look
+
+struct ContentView: View {
+    @Environment(\.managedObjectContext) private var viewContext
+
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \JournalEntry.date, ascending: true)],
+        animation: .default)
+    private var items: FetchedResults<JournalEntry>
+
+    var body: some View {
+        NavigationView {
+            List {
+                
+            }
+        }
+    }
+    
+}
+
+
+// Step 4: Now add a new SwiftUIView - AddJoournalView
+
+// Step 5: Add NavigationTitle to the ContentView
+
+.navigationTitle("Personal Journal")
+
+// Step 6: Add new @State variable for showing the AddJournalView Screen
+
+@State var showAddEntryView: Bool = false
+
+// Step 7: Add navigation bar trailing item to showing the AddJournalView screen
+
+.navigationBarItems(trailing:
+    Button(action: {
+showAddEntryView = true
+}) {
+Image(systemName: "plus")
+})
+
+// Step 8: Add sheet to present the AddJournalView
+
+.sheet(isPresented: $showAddEntryView, content: {
+    AddJournalView()
+})
+
+// Step 9: Add the following variables in AddJournalView
+
+@Environment(\.dismiss) private var dismiss
+    
+@State private var journalTitle: String = ""
+@State private var content: String = ""
+
+// Step 10: Add the form control and other input fields
+
+NavigationView {
+    VStack {
+        Form {
+            Section(header: Text("Journal Entry")) {
+                TextField("Title", text: $journalTitle)
+                TextEditor(text: $content)
+                    .frame(height: 200)
+            }
+        }
+    }
+
+// Step 11: Add the toolbar and title for the screen
+
+.toolbar{
+    ToolbarItem(placement:.bottomBar) {
+        Button("Save") {
+            dismiss()
+        }
+    }
+    ToolbarItem(placement:.bottomBar) {
+        Button("Cancel") {
+            dismiss()
+        }
+    }
+}
+.navigationTitle("Add Journal")
+
+
+// Step 12: Add the viewContext variable
+
+@Environment(\.managedObjectContext) private var viewContext
+
+// Step 13: Add the Save Entry function and call the this function in Save button
+
+private func saveEntry() {
+    let newEntry = JournalEntry(context: viewContext)
+    newEntry.title = journalTitle
+    newEntry.content = content
+    newEntry.date = Date()
+    
+    do {
+        try viewContext.save()
+        dismiss()
+    } catch {
+        print("Error saving entry: \(error)")
+    }
+}
+
+// Step 14: Navigate to ContentView and add Update the List to display the content. Make sure to rename the variable items to entries 
+
+List (entries) { entry in
+    VStack(alignment:.leading) {
+        Text(entry.title ?? "")
+            .font(.headline)
+        Text(entry.date ?? Date(), style: .date)
+            .font(.subheadline)
+            .foregroundColor(.secondary)
+    }
+}

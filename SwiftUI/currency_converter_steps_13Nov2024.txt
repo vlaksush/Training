@@ -1,0 +1,119 @@
+// Currency Converter (MVVM)
+
+// Step 1: Create Model
+
+struct Currency: Identifiable, Hashable {
+    var id: String { symbol }
+    let name: String
+    let symbol: String
+    let conversionRate: Double
+}
+
+// Step 2: Create View Model
+
+class CurrencyViewModel: ObservableObject {
+    @Published var currencies: [Currency]
+    @Published var selectedFromCurrency: Currency
+    @Published var selectedToCurrency: Currency
+}
+
+// Step 3: Add init and setup dummy data
+
+init() {
+    currencies = [
+        Currency(name: "US Dollar", symbol: "USD", conversionRate: 1.0),
+        Currency(name: "Euro", symbol: "EUR", conversionRate: 0.84),
+        Currency(name: "British Pound", symbol: "GBP", conversionRate: 0.72),
+        Currency(name: "Japanese Yen", symbol: "JPY", conversionRate: 109.51)
+    ]
+    selectedFromCurrency =  Currency(name: "US Dollar", symbol: "USD", conversionRate: 1.0)
+    selectedToCurrency = Currency(name: "Euro", symbol: "EUR", conversionRate: 0.84)
+}
+    
+
+// Step 4: Add function for calculated amount for the selected currency
+
+func convertedAmount(_ amount: String) -> Double {
+    guard let amountDouble = Double(amount) else { return 0 }
+    let inUSD = amountDouble / selectedFromCurrency.conversionRate
+    return inUSD * selectedToCurrency.conversionRate
+}
+    
+// Step 5: Add function to swap the to and from currency
+
+func swapCurrencies() {
+    let temp = selectedFromCurrency
+    selectedFromCurrency = selectedToCurrency
+    selectedToCurrency = temp
+}
+
+// Step 6: Add variables to View file (ContentView)
+
+@ObservedObject var viewModel: CurrencyViewModel
+@State private var amount: String = ""
+
+// Step 7: Add Form with "Amount to Comvert Section"
+
+   VStack {
+            Form {
+                Section(header: Text("Amount to convert")) {
+                    TextField("Amount", text: $amount)
+                        .keyboardType(.decimalPad)
+                }
+            }
+   }
+
+   // Step 8: Add From Currency
+        
+    Section(header: Text("From")) {
+            Picker("From", selection: $viewModel.selectedFromCurrency) {
+                    ForEach(viewModel.currencies) { currency in
+                        Text(currency.name).tag(currency)
+                    }
+            }
+    }
+
+    // Step 9: Add To Currency
+
+    Section(header: Text("To")) {
+            Picker("To", selection: $viewModel.selectedToCurrency) {
+                ForEach(viewModel.currencies) { currency in
+                        Text(currency.name).tag(currency)
+                }
+             }
+    }
+
+    // Step 10: Converted Amount 
+
+    Section(header: Text("Converted Amount")) {
+        Text("\(viewModel.convertedAmount(amount), specifier: "%.2f") \(viewModel.selectedToCurrency.symbol)")
+            .font(.largeTitle)
+            .foregroundColor(.green)
+    }
+                
+    // Step 10: Add button for Swapping Currencies
+    
+    Button(action: {
+        viewModel.swapCurrencies()
+        }) {
+                HStack {
+                    Image(systemName: "arrow.left.arrow.right")
+                    Text("Swap Currencies")
+                }
+                .frame(minWidth: 0, maxWidth: .infinity)
+    }
+
+    // Step 11: Add Custom Style for button 
+
+    struct InteractiveButtonStyle: ButtonStyle {
+         func makeBody(configuration: Configuration) -> some View {
+            configuration.label
+                .padding()
+                .background(configuration.isPressed ? Color.orange : Color.green)
+                .cornerRadius(10)
+                .frame(minWidth: 0, maxWidth: .infinity)
+                .foregroundColor(.white)
+        }
+    }
+
+                
