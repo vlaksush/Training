@@ -68,7 +68,7 @@ Text(String(format: "$%.2f", transaction.amount))
                 }
 
 
-// setp 7
+// setp 7 -  Detail screen 
 
 Text(transaction.description)
     .font(.title)
