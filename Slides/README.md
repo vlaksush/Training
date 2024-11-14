@@ -10,7 +10,7 @@ This contains all the slides used in the workshop
 
 
 
-# Hints
+# Suresh-Hints
 
 ## Swift Basics (8 hours , 1.5 days)
 00-Apple EcoSystem - 
@@ -53,7 +53,7 @@ This contains all the slides used in the workshop
       
         go back slide (iOS Architecture.pdf) - till collection view
         
-      Training/UIKit/PhotoGallery - demo
+      Training/UIKit/PhotoGallery - demo for collections
       Training/Starter/ProfileGallery - task
         **Note** Solution for ProfileGallery => Training/UIKit/ProfileGallery
         
@@ -71,13 +71,48 @@ This contains all the slides used in the workshop
 
       Optional Demo - (or ask them to review ) Training/UIKit/NSLayoutConstruct Demo
 
-      (Optional for AutoLayout using UIKit)  - share few links from udemy (https://www.udemy.com/course/the-complete-ios9-auto-layout-course/)
+      (Optional for AutoLayout using UIKit)  - share few links from udemy (https://www.udemy.com/course/the-complete-ios9- 
+      auto-layout-course/)
 
-      Optional Demo - Training/UIKit/MyAddress ( using CLLocations - )
+      Optional Demo - Training/UIKit/MyAddress ( using CLLocations - (Lattitude , find current address)
+      
+      
+      -- UIKit over -- 3 days / 5 days over
       
         
+      ### Day 4 - SwiftUI
+      Slide - Training/Slides/SwiftUI.pdf
+         till Layout System
+      Demos - Training/SwiftUI 
+         MyFirstAppSwiftUI - Demo
+         PersonalBusinessCard - Task / Lab
+
+         go back to slide - till Form, List and Navigation, Gestures, State Management
       
-        
+         Demos - 
+         demo for List and Navigation  - `Training/SwiftUI/TransactionList`
+         demo for Grid and State(we used 2 state here)  - `Training/SwiftUI/PhotoGallery` (using Lazy Grid)
+
+         go back to slide - from MVVM to upto last
+
+         Demos - 
+         demo for Form, MVVM - `Training/SwiftUI/CurrencyConverter`
+
+
+
+
+      Slide - Training/Slides/App Lifecycles.pdf ( both UIKit and SwiftUI )
+      Demos - Training/AppLifeCycle
+            - AppLifeCycleUIKit
+            - AppLifeCycleSwiftUI
+
+
+      Slide - Training/Slides/Interoperability.pdf (objectiveC  and Swift Codebase / UIKit and SwiftUI)
+      Demos - Training/Interoperability
+         
+
+      
+         
       
               
 
