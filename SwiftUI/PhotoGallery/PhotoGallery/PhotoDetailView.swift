@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import SDWebImageSwiftUI
 
 struct PhotoDetailView: View {
     
@@ -15,7 +14,7 @@ struct PhotoDetailView: View {
     
     var body: some View {
         VStack {
-            ZoomablePhotoView(imageName: photo.largeImageURL, scale: $scale)
+            ZoomablePhotoView(imageName: photo.name, scale: $scale)
         }
         .navigationBarItems(trailing: Button(action: {
             scale = 1.0
@@ -25,9 +24,9 @@ struct PhotoDetailView: View {
     }
 }
 
-//#Preview {
-//    PhotoDetailView(photo: Photo(name: "photo4"))
-//}
+#Preview {
+    PhotoDetailView(photo: Photo(name: "photo4"))
+}
 
 struct ZoomablePhotoView: View {
     
@@ -35,9 +34,8 @@ struct ZoomablePhotoView: View {
     @Binding var scale: CGFloat
     
     var body: some View {
-        WebImage(url:URL(string: imageName))
+        Image(imageName)
                     .resizable()
-                    .indicator(.activity)
                     .aspectRatio(contentMode: .fit)
                     .scaleEffect(scale)
                     .gesture(
