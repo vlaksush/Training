@@ -99,20 +99,72 @@ This contains all the slides used in the workshop
          demo for Form, MVVM - `Training/SwiftUI/CurrencyConverter`
 
 
-
+### App LifeCycle
 
       Slide - Training/Slides/App Lifecycles.pdf ( both UIKit and SwiftUI )
       Demos - Training/AppLifeCycle
             - AppLifeCycleUIKit
             - AppLifeCycleSwiftUI
 
+### Interoperabability
 
-      Slide - Training/Slides/Interoperability.pdf (objectiveC  and Swift Codebase / UIKit and SwiftUI)
+      Slide - Training/Slides/Interoperabability.pdf (objectiveC  and Swift Codebase / UIKit and SwiftUI)
       Demos - Training/Interoperability
          
 
+### Core Data
+
+      Slide - Training/Slides/CoreData.pdf
+      Demos - Training/SwiftUI/PersonalJournal
+            * Core Data 
+            * how to use mvvm and core data
+            * UserDefaults (used to store simple values like user preferences (theme, daily remainder) ),user Local 
+              Notification) 
+            * TabView
+
+### Concurrency
+
+   Slide - Training/Slides/Concurrency.pdf 
+   Demos - Training/SwiftUI/LiveCurrency  (Latest Concurrency - from swift 5.5)
+
+
+
+   Slides - Training/Slides/Dependency Manager.pdf (SPM(from xcode 11), Cocaapod, Imnage, Image URL) - how to install 3rd 
+            party tool
+   Demo -   Training/SwiftUI/PhotoExplorer (data/images from api)
       
-         
+
+### Framework (need or not - get clarify from SME) - like modules 
+   
+   Slide - Training/Slides/Framework.pdf
+   Demos - Training/SwiftUI/Framework
+
+
+### Testing
+   
+   Slide - Training/Slides/Unit and UI Testing.pdf
+   Demos - Training/SwiftUI/PersonalJournal (already used it for other topics)
+   
+
+
+
+
+
+Optional / Bonus Demos 
+   Training/SwiftUI/SimpleStopWatch
+   Training/SwiftUI/LapTrack( List... )
+
+Optional / Bonus Demos
+   Training/SwiftUI/MemoFinder - SwiftData(ios17), SolidPrinciples - Protocol(interface) oriented Programming (POP)
+
+Extra Demos - Swift UI Controls 
+   Training/SwiftUI/SwifthUINavigationSampleApps
+
+
+Extra Demos - Training/Mac - xcode - simple code with dynamic input , based on the input output
+
+
+  
       
               
 
