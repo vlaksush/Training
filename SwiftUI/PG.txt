@@ -29,7 +29,17 @@ struct PixabayResponse: Codable {
 }
 
 
-Step 4: Add a new class, ExchangeRateService then add searchPhotos function.
+Step 4: Add a new class, ExchangeRateService then add required searchPhotos function and other variables
+
+ enum PixabayError: Error {
+        case invalidAPIKey
+    }
+    
+    static let shared = PixabayService()
+    private init() {}
+    
+    private let baseURL = "https://pixabay.com/api/"
+    private let apiKey = "YOUR_API_KEY_HERE"
 
   func searchPhotos(query: String, completion: @escaping (Result<[Photo], Error>) -> Void) {
 
